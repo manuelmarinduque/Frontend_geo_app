@@ -6,11 +6,12 @@ import iconLocation from './iconLocation'
 const Marcadores= ({marcadores}) => {
     return(
         marcadores.map((marcador)=>(
-        <Marker position={ marcador.latitude, marcador.longitude} icon={iconLocation}>
+
+        <Marker position={[marcador.latitude , marcador.longitude]}>
             <Popup>
-                {marcador.name}. <br />
-                {marcador.address}.<br />
-                {marcador.phone}.<br />
+                {marcador.name}. <br/>
+                {marcador.address}. <br/>
+                {marcador.phone}. <br/>
             </Popup>
         </Marker>       
         ))    

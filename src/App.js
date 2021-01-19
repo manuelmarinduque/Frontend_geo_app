@@ -1,12 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
+import L from 'leaflet';
 
 import Marcadores from './Componentes/Marcadores'
 import { Component } from 'react';
-import iconLocation from './Componentes/iconLocation' 
+
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+
+let DefaultIcon = L.icon({
+  iconUrl: icon,
+  shadowUrl: iconShadow
+});
+
+L.Marker.prototype.options.icon = DefaultIcon;
+
 
 class App extends Component{
 
@@ -15,15 +25,16 @@ class App extends Component{
       };
   
     componentDidMount() {
-      fetch('http://localhost:3500/get_data',{ 
+      fetch("http://demo1009943.mockable.io/estaciones",{ 
       method: 'GET',
       headers: {
         Accept: 'application/json',
                 'Content-Type':'application/json',
-                'Authorization': '3ywg&hsnxu43o9+iaz&sdtr'
+                //'Authorization': '3ywg&hsnxu43o9+iaz&sdtr'
       }})// Aqui va la ruta
        .then(res => res.json())
         .then((data) => {
+          console.log(data)
           this.setState({ marcadores: data })
        })
         .catch(console.log)
@@ -32,14 +43,9 @@ class App extends Component{
   
   render(){
     return(
-      <MapContainer center={[4.08892, -76.20143]} zoom={13} scrollWheelZoom={false}>
+      <MapContainer center={[4.08892, -76.20143]} zoom={13} scrollWheelZoom={true}>
         <TileLayer attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' 
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
-        <Marker position={[4.08892, -76.20143]} icon={iconLocation}>
-        <Popup>
-                holi. <br />
-        </Popup>
-        </Marker>
         <Marcadores marcadores={this.state.marcadores} />
       
       </MapContainer>
