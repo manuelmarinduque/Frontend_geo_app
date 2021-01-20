@@ -7,9 +7,9 @@ const Marcadores= ({marcadores}) => {
         marcadores.map((marcador,i)=>(
         <Marker key={i} position={[marcador.latitude , marcador.longitude]}>
             <Popup>
-                {marcador.name}. <br/>
-                {marcador.address}. <br/>
-                {marcador.phone}. <br/>
+                <b>Nombre:</b> {marcador.name}. <br/>
+                <b>Direccion:</b> {marcador.address}. <br/>
+                <b>Telefono:</b> {marcador.phone}. <br/>
             </Popup>
         </Marker>       
         ))    
