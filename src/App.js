@@ -1,8 +1,9 @@
 import './App.css';
 
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer} from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet';
+import jwt from 'jsonwebtoken';
 
 import Marcadores from './Componentes/Marcadores'
 import { Component } from 'react';
@@ -25,17 +26,19 @@ class App extends Component{
       };
   
     componentDidMount() {
-      fetch("http://demo1009943.mockable.io/estaciones",{ 
+      var data1 = "";
+      fetch("http://localhost:3500/get_data",{ 
       method: 'GET',
       headers: {
         Accept: 'application/json',
                 'Content-Type':'application/json',
-                //'Authorization': '3ywg&hsnxu43o9+iaz&sdtr'
       }})// Aqui va la ruta
        .then(res => res.json())
         .then((data) => {
-          console.log(data)
-          this.setState({ marcadores: data })
+          data1 = jwt.verify(data.token, "3ywg&hsnxu43o9+iaz&sdtr", function(err, dat){
+            return dat
+          })
+          this.setState({ marcadores : Object.entries(data1)[0][1]})
        })
         .catch(console.log)
       };
