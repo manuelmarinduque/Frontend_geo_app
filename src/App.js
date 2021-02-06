@@ -1,5 +1,7 @@
 import './App.css';
 
+import React from 'react';
+
 import { MapContainer, TileLayer} from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet';
@@ -16,15 +18,17 @@ let DefaultIcon = L.icon({
   shadowUrl: iconShadow
 });
 
+
+
 L.Marker.prototype.options.icon = DefaultIcon;
 
 
 class App extends Component{
 
   state ={
-        marcadores:[]
+        marcadores:[],
       };
-  
+
     componentDidMount() {
       var data1 = "";
       fetch("http://localhost:3500/get_data",{ 
@@ -46,14 +50,13 @@ class App extends Component{
   
   render(){
     return(
-      <MapContainer center={[4.08892, -76.20143]} zoom={13} scrollWheelZoom={true}>
-        <TileLayer attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' 
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
-        <Marcadores marcadores={this.state.marcadores} />
-      
-      </MapContainer>
-
-    );
+          <MapContainer center={[4.08892, -76.20143]} zoom={13} scrollWheelZoom={true}>
+          <TileLayer attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' 
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
+          <Marcadores marcadores={this.state.marcadores} />
+          </MapContainer>
+  );
+          
   }
 }
 
