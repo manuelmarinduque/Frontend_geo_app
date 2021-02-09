@@ -6,9 +6,11 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
 import LayersIcon from '@material-ui/icons/Layers';
 import LocalGasStationIcon from '@material-ui/icons/LocalGasStation';
+import InicioSesion from './InicioSesion';
 
 export const mainListItems = (
   <div>
+    < InicioSesion />
     <ListItem button>
       <ListItemIcon>
         <DashboardIcon />

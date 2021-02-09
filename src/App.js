@@ -31,8 +31,9 @@ class App extends Component{
 
     componentDidMount() {
       var data1 = "";
-      fetch("http://localhost:3500/get_data",{ 
+      fetch("http://localhost:3000/station",{ 
       method: 'GET',
+      mode: 'no-cors',
       headers: {
         Accept: 'application/json',
                 'Content-Type':'application/json',
