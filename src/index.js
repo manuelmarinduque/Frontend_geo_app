@@ -4,12 +4,13 @@ import "./index.css";
 import App from "./App";
 import Dash from "./Dashboard";
 import Login from "./Componentes/Login";
+import AgrUsuarios from "./Componentes/AgregarUsuarios";
 
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Login />
+    <Dash />
   </React.StrictMode>,
   document.getElementById("root")
 );
