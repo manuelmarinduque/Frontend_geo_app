@@ -25,17 +25,10 @@ class App extends Component {
     marcadores: [],
   };
 
-class App extends Component{
-
-  state ={
-        marcadores:[],
-      };
-
-    componentDidMount() {
-      var data1 = "";
-      fetch("http://localhost:3000/station",{ 
-      method: 'GET',
-      mode: 'no-cors',
+  componentDidMount() {
+    var data1 = "";
+    fetch("http://localhost:3500/station", {
+      method: "GET",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
