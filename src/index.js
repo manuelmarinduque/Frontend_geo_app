@@ -4,8 +4,10 @@ import "./index.css";
 import App from "./App";
 import Dash from "./Dashboard";
 import Login from "./Componentes/Login";
+import RegistroUsuarios from "./Componentes/registroUsuarios";
 
 import reportWebVitals from "./reportWebVitals";
+
 
 ReactDOM.render(
   <React.StrictMode>
