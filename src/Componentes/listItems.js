@@ -4,28 +4,120 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
-import LayersIcon from '@material-ui/icons/Layers';
 import LocalGasStationIcon from '@material-ui/icons/LocalGasStation';
+import { makeStyles } from '@material-ui/core/styles';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import List from '@material-ui/core/List';
+import Collapse from '@material-ui/core/Collapse';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import StarBorder from '@material-ui/icons/StarBorder';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import AddIcon from '@material-ui/icons/Add';
+import Link from '@material-ui/core/Link';
 
-export const mainListItems = (
-  <div>
-    <ListItem button>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Dashboard" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Usuarios" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <LocalGasStationIcon />
-      </ListItemIcon>
-      <ListItemText primary="Estaciones" />
-    </ListItem>
-  </div>
-);
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+  },
+  nested: {
+    paddingLeft: theme.spacing(4),
+  },
+}));
+
+export default function NestedList() {
+  const classes = useStyles();
+  const [open2, setOpen2] = React.useState(true);
+  const [open1, setOpen1] = React.useState(true);
+
+  const handleClick1 = () => {
+    setOpen1(!open1);
+  };
+
+  const handleClick2 = () => {
+    setOpen2(!open2);
+  };
+
+  return (
+    <List
+      component="nav"
+      aria-labelledby="nested-list-subheader"
+      subheader={
+        <ListSubheader component="div" id="nested-list-subheader">
+          Menú
+        </ListSubheader>
+      }
+      className={classes.root}
+    >
+      <ListItem button>
+        <ListItemIcon>
+          <DashboardIcon />
+        </ListItemIcon>
+        <ListItemText primary="Dashboard" />
+      </ListItem>
+      <ListItem button onClick={handleClick1}>
+        <ListItemIcon>
+          <PeopleIcon />
+        </ListItemIcon>
+        <ListItemText primary="Usuarios" />
+        {open1 ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={open1} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+              <PersonAddIcon />
+            </ListItemIcon>
+            <ListItemText primary="Crear" />
+          </ListItem>
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+              <EditIcon />
+            </ListItemIcon>
+            <ListItemText primary="editar" />
+          </ListItem>
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+              <DeleteIcon />
+            </ListItemIcon>
+            <ListItemText primary="eliminar" />
+          </ListItem>
+        </List>
+      </Collapse>
+
+      <ListItem button onClick={handleClick2}>
+        <ListItemIcon>
+          <LocalGasStationIcon />
+        </ListItemIcon>
+        <ListItemText primary="Estaciones" />
+        {open2 ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={open2} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItem button className={classes.nested}>
+              <ListItemIcon>
+                <AddIcon />
+              </ListItemIcon>
+            <ListItemText primary="Crear" />  
+          </ListItem>
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+              <EditIcon />
+            </ListItemIcon>
+            <ListItemText primary="Editar" />
+          </ListItem>
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+              <DeleteIcon />
+            </ListItemIcon>
+            <ListItemText primary="Borrar" />
+          </ListItem>
+        </List>
+      </Collapse>
+    </List>
+  );
+}
