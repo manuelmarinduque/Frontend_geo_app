@@ -5,13 +5,13 @@ import App from "./App";
 import Dash from "./Dashboard";
 import Login from "./Componentes/Login";
 import RegistroUsuarios from "./Componentes/registroUsuarios";
+import Path from "./paths";
 
 import reportWebVitals from "./reportWebVitals";
 
-
 ReactDOM.render(
   <React.StrictMode>
-    <Login />
+    <Path />
   </React.StrictMode>,
   document.getElementById("root")
 );
