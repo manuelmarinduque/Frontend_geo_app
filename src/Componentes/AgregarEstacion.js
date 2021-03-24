@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { FormGroup, Row, Col, Form, Input, Label, Button } from 'reactstrap';
 import image from "../assets/images/cells.webp";
+import jwt from "jsonwebtoken";
 
 class AgregarEstacion extends Component {
 
@@ -27,10 +28,10 @@ class AgregarEstacion extends Component {
         })
     };
 
-
     enviarDatos(e) {
+        var data1 ="";
         e.preventDefault();
-        const url = "http://localhost:3500/create_station"  // se cambia la direccion en el backend
+        const url = "http://localhost:3500/station/create_station"  
         const data = {       
              name: this.state.nombre,
              address: this.state.direccion,
@@ -40,15 +41,21 @@ class AgregarEstacion extends Component {
         };
         fetch(url , {
           method: "POST",
+          mode: "no-cors",
           body: JSON.stringify(data),
           headers: {
-            Accept: "application/json",
             "Content-Type": "application/json",
+            "Authorization": "Bearer 3ywg&hsnxu43o9+iaz&sdtr"
           },
         }) // Aqui va la ruta
           .then((res) => res.json())
           .catch(error => console.error('Error:', error))
-          .then(response => console.log('Success:', response));
+          .then((data) => {data1 = jwt.verify(data.token, "3ywg&hsnxu43o9+iaz&sdtr" ,function (err, dat) {
+            return dat;
+          }
+        )
+      }
+      )
       }
     
 
@@ -88,7 +95,7 @@ class AgregarEstacion extends Component {
                   placeholder="Telefono de la estacion de gasolina"
                   value={this.state.telefono} onChange={this.onChange}
                 />
-                <Label>Latitud</Label>
+                <Label>Latitudes</Label>
                 <input
                   type="text"
                   id="latitude"
