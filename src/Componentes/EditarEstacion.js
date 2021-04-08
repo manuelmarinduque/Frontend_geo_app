@@ -106,7 +106,7 @@ class EditarEstacion extends Component {
                         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
                             <div>
                                 <h2>
-                                    <font color="black" size="5"> Eliminar Estaciones</font>
+                                    <font color="black" size="5"> Editar Estaciones</font>
                                 </h2>
                             </div>
                         </nav>

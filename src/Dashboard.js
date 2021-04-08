@@ -20,6 +20,10 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import  NestedList  from './Componentes/listItems';
 import Mapa from './App';
+import AgregarEstacion from "./Componentes/AgregarEstacion";
+import EliminarEstacion from "./Componentes/EliminarEstacion";
+import EditarEstacion from "./Componentes/EditarEstacion";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 function Copyright() {
   return (
@@ -170,7 +174,17 @@ export default function Dashboard() {
         <Container maxWidth="lg" className={classes.container}>
             <Grid item xs={12}>
               <Paper className={fixedHeightPaper}>
-                <Mapa />
+                       
+                  
+               <BrowserRouter>
+                <Switch>
+                  <Route exact path="/home" component={Mapa}/>
+                  <Route exact path="/home/EditarEstacion" component={EditarEstacion}/>
+                  <Route exact path="/home/EliminarEstacion" component={EliminarEstacion}/>
+                  <Route exact path="/home/AgregarEstacion" component={AgregarEstacion}/>
+                </Switch>
+              </BrowserRouter>
+
               </Paper>
             </Grid>
           <Box pt={4}>
