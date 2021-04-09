@@ -12,6 +12,9 @@ class SedeFormModal extends Component {
       error: false,
       errorMessage: "",
       data: this.props.data,
+      name: this.props.data.name,
+      latitude: this.props.data.latitude,
+      longitude: this.props.data.longitude,
     };
   }
 
@@ -50,6 +53,9 @@ class SedeFormModal extends Component {
           toggle={this.toggle}
           fullscreen="below sm"
         >
+          <div className="modal-header">
+            <br />
+          </div>
           <div className="modal-body">
             <div className="row">
               <div className="offset col-md-12">
@@ -65,14 +71,14 @@ class SedeFormModal extends Component {
                       <div className="container" style={{ padding: "10px" }}>
                         <form action="" className="form">
                           <div className="mb-3 row">
-                            <label className="col-sm-4 col-form-label">
+                            <label className="col-sm-3 col-form-label">
                               Name
                             </label>
-                            <div className="col-sm-8">
+                            <div className="col-sm-9">
                               <input
                                 type="text"
                                 name="name"
-                                value={this.state.data.name}
+                                defaultValue={this.state.name}
                                 // placeholder="Akiles"
                                 className="form-control"
                                 onChange={this.handleChange}
@@ -80,14 +86,14 @@ class SedeFormModal extends Component {
                             </div>
                           </div>
                           <div className="mb-3 row">
-                            <label className="col-sm-4 col-form-label">
+                            <label className="col-sm-3 col-form-label">
                               Latitude
                             </label>
-                            <div className="col-sm-8">
+                            <div className="col-sm-9">
                               <input
                                 type="text"
                                 name="latitude"
-                                value={this.state.data.latitude}
+                                defaultValue={this.state.latitude}
                                 // placeholder="Salto"
                                 className="form-control"
                                 onChange={this.handleChange}
@@ -95,14 +101,14 @@ class SedeFormModal extends Component {
                             </div>
                           </div>
                           <div className="mb-3 row">
-                            <label className="col-sm-4 col-form-label">
+                            <label className="col-sm-3 col-form-label">
                               Longitude
                             </label>
-                            <div className="col-sm-8">
+                            <div className="col-sm-9">
                               <input
                                 type="text"
                                 name="longitude"
-                                value={this.state.data.longitude}
+                                defaultValue={this.state.longitude}
                                 // placeholder="akiles@correo.com"
                                 className="form-control"
                                 onChange={this.handleChange}
@@ -110,8 +116,8 @@ class SedeFormModal extends Component {
                             </div>
                           </div>
                           <div className="mb-3 row">
-                            <div className="col-sm-4 col-form-label">City</div>
-                            <div className="col-sm-8">
+                            <div className="col-sm-3 col-form-label">City</div>
+                            <div className="col-sm-9">
                               <input
                                 type="text"
                                 name="city"

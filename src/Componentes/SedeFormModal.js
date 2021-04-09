@@ -86,6 +86,9 @@ class SedeFormModal extends Component {
           toggle={this.toggle}
           fullscreen="below sm"
         >
+          <div className="modal-header">
+            <br />
+          </div>
           <div className="modal-body">
             <div className="row">
               <div className="offset col-md-12">
@@ -95,7 +98,7 @@ class SedeFormModal extends Component {
                       className="card-header bg-transparent"
                       style={{ textAlign: "center" }}
                     >
-                      Create Sede
+                      Edit Sede
                     </div>
                     <div className="card-body">
                       <div className="container" style={{ padding: "10px" }}>
