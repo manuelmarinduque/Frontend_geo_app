@@ -129,6 +129,9 @@ class UserFormModal extends Component {
           toggle={this.toggle}
           fullscreen="below sm"
         >
+          <div className="modal-header">
+            <br />
+          </div>
           <div className="modal-body">
             <div className="row">
               <div className="offset col-md-12">
