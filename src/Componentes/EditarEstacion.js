@@ -33,7 +33,7 @@ class EditarEstacion extends Component {
 
 
     obtenerEstaciones() {
-        fetch('http://env-9240053.mircloud.host/station'            //'http://localhost:3500/station/stations'
+        fetch('http://localhost:3500/station/stations'
                 , {
                       method: "GET",
                       mode: "no-cors",
