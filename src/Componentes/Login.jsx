@@ -28,7 +28,7 @@ class Login extends Component {
   handleSubmit(e) {
     var data1 = "";
     e.preventDefault();
-    fetch("http://localhost:3500/user/login", {
+    fetch("http://localhost:5500/user/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -33,7 +33,7 @@ class EditarEstacion extends Component {
 
 
     obtenerEstaciones() {
-        fetch('http://env-9240053.mircloud.host/station'            //'http://localhost:3500/station/stations'
+        fetch('http://localhost:5500/station/stations'
                 , {
                       method: "GET",
                       mode: "no-cors",
@@ -52,7 +52,7 @@ class EditarEstacion extends Component {
     
 
     editarEstacion(id) {
-        fetch('http://localhost:3500/station/:' + id, {
+        fetch('http://localhost:5500/station/:' + id, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -74,7 +74,7 @@ class EditarEstacion extends Component {
 
     enviarEstacion(e){
         e.preventDefault();
-        fetch("http://localhost:3500/station/update" + this.state.id, {
+        fetch("http://localhost:5500/station/update" + this.state.id, {
             method: "PUT",
         /*    headers: {
                 "Content-Type": "application/json",

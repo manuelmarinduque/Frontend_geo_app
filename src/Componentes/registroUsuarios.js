@@ -3,6 +3,10 @@ import "../assets/Log.css";
 import jwt from "jsonwebtoken";
 import image from "../assets/images/new-user.png";
 import { Component } from "react";
+import { Redirect } from "react-router-dom";
+import {Grid, Select, MenuItem} from '@material-ui/core';
+import selectEmpresa from "./selectempresa";
+
 
 
 class registroUsuarios extends Component{
@@ -17,6 +21,12 @@ class registroUsuarios extends Component{
         nacionalidad:"",
         direccion:"",
         telefono:"",
+        empresa:"",
+        rol:"",
+        sede:"",
+        membresia:"",
+        acces: false,
+        empresas:[]
       };
       
       this.handleChange = this.handleChange.bind(this);
@@ -24,8 +34,29 @@ class registroUsuarios extends Component{
 
 
     }
-    //componentDidMount() {
-    //};
+
+    componentDidMount() {
+      var data1 = "";
+      fetch("", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }) // Aqui va la ruta
+        .then((res) => res.json())
+        .then((data) => {
+          data1 = jwt.verify(
+            data.token,
+            "3ywg&hsnxu43o9+iaz&sdtr",
+            function (err, dat) {
+              return dat;
+            }
+          );
+          this.setState({ empresas : Object.entries(data1)[0][1] });
+        })
+        .catch(console.log);
+    }
   
     handleChange(e) {
       const { name, value } = e.target;
@@ -35,7 +66,7 @@ class registroUsuarios extends Component{
     handleSubmit(e) {
       var data1 =""
       e.preventDefault();
-      fetch("http://localhost:3500/user/create_user", {
+      fetch("http://localhost:5500/user/create_user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -52,8 +83,8 @@ class registroUsuarios extends Component{
       }) // Aqui va la ruta
         .then((res) => res.json())
         .catch(error => console.error('Error: ',error))
-        .then((data) => {data1 = jwt.verify(data.token, "3ywg&hsnxu43o9+iaz&sdtr",function (err, dat) {
-              return dat;
+        .then((data) => {data1 = jwt.verify(data.token, "3ywg&hsnxu43o9+iaz&sdtr",function (err, dat) { 
+            return dat;
             }
           )
         }
@@ -65,95 +96,96 @@ class registroUsuarios extends Component{
     render(){
         const { usuario, contraseña, tipo, nombre, genero, nacionalidad, direccion, telefono} = this.state;  
         return (
-        <div class="wrapper fadeInDown">
-            <div id="formContent">
-                {/* <!-- Tabs Titles --> */}
-            
-                {/* <!-- Icon --> */}
-                <div class="fadeIn first" >
-                    <img src={image} id="icon" alt="User Icon" />
-                </div>
-            
-                {/* <!-- Login Form --> */}
-                <form onSubmit={this.handleSubmit}>
-                    <input
-                    type="text"
-                    id="usuario"
-                    class="fadeIn second"
-                    name="usuario"
-                    placeholder="identificacion"
-                    value = {usuario}
-                    onChange={this.handleChange}
-                    />
-                    <input
-                     type="password"
-                     id="password"
-                     class="fadeIn third"
-                     name="contraseña"
-                     placeholder="contraseña"
-                     value = {contraseña}
-                     onChange={this.handleChange}
-                    />
-                    <input
-                     type="text"
-                     id="tipo"
-                     class="fadeIn fourth"
-                     name="tipo"
-                     placeholder="tipo de documento"
-                     value = {tipo}
-                     onChange={this.handleChange}
-                    />
-                    <input
-                     type="text"
-                     id="nombre"
-                     class="fadeIn fifth"
-                     name="nombre"
-                     placeholder="Nombre Completo"
-                     value = {nombre}
-                     onChange={this.handleChange}
-                    />
-                    <input
-                     type="text"
-                     id="genero"
-                     class="fadeIn sixth"
-                     name="genero"
-                     placeholder="genero"
-                     value = {genero}
-                     onChange={this.handleChange}
-                    />
-                    <input
-                     type="text"
-                     id="nacionalidad"
-                     class="fadeIn seventh"
-                     name="nacionalidad"
-                     placeholder="nacionalidad"
-                     value = {nacionalidad}
-                     onChange={this.handleChange}
-                    />
-                    <input
-                     type="text"
-                     id="direccion"
-                     class="fadeIn eighth"
-                     name="direccion"
-                     placeholder="direccion"
-                     value = {direccion}
-                     onChange={this.handleChange}
-                    />
-                    <input
-                     type="text"
-                     id="telefono"
-                     class="fadeIn ninth"
-                     name="telefono"
-                     placeholder="telefono"
-                     value = {telefono}
-                     onChange={this.handleChange}
-                    />
-
-                    <input type="submit" class="fadeIn tenth" value="Registrar" />
-                    </form>
-            
-                </div>
-            </div>
+        <Grid  container spacing={1} align ="center" >
+          {/* <!-- Login Form --> */}
+          <form onSubmit={this.handleSubmit}>
+            <Grid item xs >
+            <input
+              type="text"
+              id="usuario"
+              class="fadeIn second"
+              name="usuario"
+              placeholder="identificacion"
+              value = {usuario}
+              onChange={this.handleChange}
+              />
+            </Grid>
+            <Grid item xs >
+            <input
+              type="password"
+              id="password"
+              class="fadeIn third"
+              name="contraseña"
+              placeholder="contraseña"
+              value = {contraseña}
+              onChange={this.handleChange}
+              />
+              </Grid>
+            <input
+              type="text"
+              id="tipo"
+              class="fadeIn fourth"
+              name="tipo"
+              placeholder="tipo de documento"
+              value = {tipo}
+              onChange={this.handleChange}
+              />
+            <input
+              type="text"
+              id="nombre"
+              class="fadeIn fifth"
+              name="nombre"
+              placeholder="Nombre Completo"
+              value = {nombre}
+              onChange={this.handleChange}
+              />
+            <input
+              type="text"
+              id="genero"
+              class="fadeIn sixth"
+              name="genero"
+              placeholder="genero"
+              value = {genero}
+              onChange={this.handleChange}
+              />
+            <input
+              type="text"
+              id="nacionalidad"
+              class="fadeIn seventh"
+              name="nacionalidad"
+              placeholder="nacionalidad"
+              value = {nacionalidad}
+              onChange={this.handleChange}
+              />
+            <input
+              type="text"
+              id="direccion"
+              class="fadeIn eighth"
+              name="direccion"
+              placeholder="direccion"
+              value = {direccion}
+              onChange={this.handleChange}
+              />
+            <input
+              type="text"
+              id="telefono"
+              class="fadeIn ninth"
+              name="telefono"
+              placeholder="telefono"
+              value = {telefono}
+              onChange={this.handleChange}
+              />
+            <Select
+            labelId="empresa-select-label"
+            id="empresa-select"
+            value={this.state.empresa}
+            onChange={this.handleChange}
+            >
+              <selectEmpresa empresas = {this.state.empresas}/>
+            </Select>
+            <input type="submit" class="fadeIn tenth" value="Registrar" />
+          </form>
+        </Grid>
         );
     }  
 }

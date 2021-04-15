@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Modal } from "reactstrap";
 import edit from "../assets/images/editSede.webp";
+import jwt from "jsonwebtoken";
 
 import axios from "axios";
 
@@ -12,13 +13,39 @@ class SedeFormModal extends Component {
       error: false,
       errorMessage: "",
       data: this.props.data,
-      name: this.props.data.name,
-      latitude: this.props.data.latitude,
-      longitude: this.props.data.longitude,
+      name: this.props.data.nombre_sede,
+      latitude: this.props.data.latitud,
+      longitude: this.props.data.longitud,
+      city: this.props.data.ciudad,
+      phone:this.props.data.telefono,
     };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.enviarSede = this.enviarSede.bind(this);
   }
 
-  componentDidMount = async () => {};
+  enviarSede(e) {
+    var data1 =""
+    e.preventDefault();
+    fetch("http://localhost:5500/sede/", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer 3ywg&hsnxu43o9+iaz&sdtr"
+      },
+      body: JSON.stringify({id_sede: this.state.data.id_sede, 
+                           nombre_sede: this.state.name,
+                           id_empresa: this.state.data.id_empresa, 
+                           direccion: this.state.data.direccion,
+                           latitud: this.state.latitude, 
+                           longitud:this.state.longitude,
+                           telefono:this.state.phone,
+                           ciudad:this.state.city}),
+    }) // Aqui va la ruta
+      .then((res) => res.json())
+      .catch(error => console.error('Error: ',error))
+      alert('sede modificada' + this.state.name); 
+  };
 
   toggle = () => {
     this.setState({
@@ -28,7 +55,7 @@ class SedeFormModal extends Component {
     });
   };
 
-  handleCahnge = (e) => {
+  handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
     });
@@ -121,6 +148,20 @@ class SedeFormModal extends Component {
                               <input
                                 type="text"
                                 name="city"
+                                defaultValue={this.state.city}
+                                // placeholder="password"
+                                className="form-control"
+                                onChange={this.handleChange}
+                              />
+                            </div>
+                          </div>
+                          <div className="mb-3 row">
+                            <div className="col-sm-3 col-form-label">telefono</div>
+                            <div className="col-sm-9">
+                              <input
+                                type="text"
+                                name="phone"
+                                defaultValue={this.state.phone}
                                 // placeholder="password"
                                 className="form-control"
                                 onChange={this.handleChange}
@@ -143,7 +184,7 @@ class SedeFormModal extends Component {
                         <div className="d-grid gap-2 col-6 mx-auto">
                           <button
                             className="btn btn-success"
-                            onClick={this.handleClick}
+                            onClick={this.enviarSede}
                           >
                             Submit
                           </button>

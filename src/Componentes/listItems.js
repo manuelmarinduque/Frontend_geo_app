@@ -72,25 +72,16 @@ export default function NestedList() {
       </ListItem>
       <Collapse in={open1} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItem button className={classes.nested}>
-            <ListItemIcon>
-              <PersonAddIcon />
-            </ListItemIcon>
-            {/* <ListItemText primary="Crear" /> */}
-            <UserFormModal />
-          </ListItem>
-          <ListItem button className={classes.nested}>
-            <ListItemIcon>
-              <EditIcon />
-            </ListItemIcon>
-            <ListItemText primary="editar" />
-          </ListItem>
-          <ListItem button className={classes.nested}>
-            <ListItemIcon>
-              <DeleteIcon />
-            </ListItemIcon>
-            <ListItemText primary="eliminar" />
-          </ListItem>
+        <li>
+            <Link href="/home/AgregarUsuario">
+              <ListItem button className={classes.nested}>
+                <ListItemIcon>
+                  <PersonAddIcon />
+                </ListItemIcon>
+                <ListItemText primary="Crear" />
+              </ListItem>
+            </Link>
+         </li>
         </List>
       </Collapse>
 
@@ -103,26 +94,46 @@ export default function NestedList() {
       </ListItem>
       <Collapse in={open2} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItem button className={classes.nested}>
-            <ListItemIcon>
-              <AddIcon />
-            </ListItemIcon>
-            <SedeFormModal />
-
-            {/* <ListItemText primary="Crear" /> */}
-          </ListItem>
-          <ListItem button className={classes.nested}>
-            <ListItemIcon>
-              <EditIcon />
-            </ListItemIcon>
-            <ListItemText primary="Editar" />
-          </ListItem>
-          <ListItem button className={classes.nested}>
-            <ListItemIcon>
-              <DeleteIcon />
-            </ListItemIcon>
-            <ListItemText primary="Borrar" />
-          </ListItem>
+        <li>
+            <Link href="/home/AgregarEstacion">
+              <ListItem button className={classes.nested}>
+                <ListItemIcon>
+                  <AddIcon />
+                </ListItemIcon>
+                <ListItemText primary="Crear" />
+              </ListItem>
+            </Link>
+          </li>
+          <li>
+            <Link href="/home/EditarEstacion">
+              <ListItem button className={classes.nested}>
+                <ListItemIcon>
+                  <EditIcon />
+                </ListItemIcon>
+                <ListItemText primary="Editar" />
+              </ListItem>
+            </Link>
+          </li>
+          <li>
+            <Link href="/home/EliminarEstacion">
+              <ListItem button className={classes.nested}>
+                <ListItemIcon>
+                  <DeleteIcon />
+                </ListItemIcon>
+                <ListItemText primary="Borrar" />
+              </ListItem>
+            </Link>
+          </li>
+          <li>
+            <Link href="/home/Sedes">
+              <ListItem button className={classes.nested}>
+                <ListItemIcon>
+                  <DashboardIcon />
+                </ListItemIcon>
+                <ListItemText primary="Sedes" />
+              </ListItem>
+            </Link>
+          </li>          
         </List>
       </Collapse>
     </List>
