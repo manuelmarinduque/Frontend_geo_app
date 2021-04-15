@@ -74,7 +74,7 @@ class EditarEstacion extends Component {
 
     enviarEstacion(e){
         e.preventDefault();
-        fetch("http://localhost:3500/station/update" + this.state.id, {
+        fetch("http://localhost:3500/station/update/" + this.state.id, {
             method: "PUT",
         /*    headers: {
                 "Content-Type": "application/json",
@@ -92,7 +92,8 @@ class EditarEstacion extends Component {
                 longitude: "",
                 id: "",
             })
-            console.log(data)
+            console.log(data);
+            this.obtenerEstaciones();
         })
         .catch(err => console.log(err))
     }
