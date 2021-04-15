@@ -1,6 +1,5 @@
 import React from "react";
 import "../assets/Log.css";
-import jwt from "jsonwebtoken";
 import image from "../assets/images/cells.webp";
 import { Component } from "react";
 import { Redirect } from "react-router-dom";
@@ -9,8 +8,8 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      usuario: "",
-      contraseña: "",
+      numero_documento: "",
+      password: "",
       acces: false,
     };
 
@@ -21,42 +20,32 @@ class Login extends Component {
   //};
 
   handleChange(e) {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   handleSubmit(e) {
-    var data1 = "";
     e.preventDefault();
-    fetch("http://localhost:3500/user/login", {
+    fetch("http://localhost:3500/usuario/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer 3ywg&hsnxu43o9+iaz&sdtr",
       },
       body: JSON.stringify({
-        doc_number: this.state.usuario,
-        password: this.state.contraseña,
+        numero_documento: this.state.numero_documento,
+        password: this.state.password,
       }),
     }) // Aqui va la ruta
       .then((res) => {
         res.json().then((data) => {
           if (data.token) {
+            window.localStorage.setItem("documento", this.state.documento);
+            window.localStorage.setItem("token", data.token);
             this.setState({ acces: true });
           }
         });
       })
-      // .then((data) => {
-      //   console.log(data.token);
-      //   data1 = jwt.verify(
-      //     data.token,
-      //     "3ywg&hsnxu43o9+iaz&sdtr",
-      //     function (err, dat) {
-      //       console.log("HERE" + dat);
-      //       return dat;
-      //     }
-      //   );
-      // })
+
       .catch((err) => {
         console.log("ERROR: " + err.message);
       });
@@ -65,7 +54,7 @@ class Login extends Component {
 
   render() {
     if (!this.state.acces) {
-      const { usuario, contraseña } = this.state;
+      const { numero_documento, password } = this.state;
       return (
         <div class="wrapper fadeInDown">
           <div id="formContent">
@@ -82,18 +71,18 @@ class Login extends Component {
                 type="text"
                 id="login"
                 class="fadeIn second"
-                name="usuario"
-                placeholder="document"
-                value={usuario}
+                name="numero_documento"
+                placeholder="documento"
+                value={numero_documento}
                 onChange={this.handleChange}
               />
               <input
                 type="password"
                 id="password"
                 class="fadeIn third"
-                name="contraseña"
+                name="password"
                 placeholder="password"
-                value={contraseña}
+                value={password}
                 onChange={this.handleChange}
               />
 

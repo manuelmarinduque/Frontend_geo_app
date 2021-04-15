@@ -118,7 +118,7 @@ class UserFormModal extends Component {
 
   render() {
     return (
-      <div className="container" style={{ padding: "10px", maxWidth: "720px" }}>
+      <div className="container" style={{ padding: "10px", maxWidth: "720px", maxHeight: "600px" }}>
         <button className="btn" onClick={this.toggle}>
           Crear
           {/* <img src={user} alt="" height="30px" /> */}

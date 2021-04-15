@@ -23,6 +23,7 @@ import Mapa from './App';
 import AgregarEstacion from "./Componentes/AgregarEstacion";
 import EliminarEstacion from "./Componentes/EliminarEstacion";
 import EditarEstacion from "./Componentes/EditarEstacion";
+import AgregarUsuario from "./Componentes/registroUsuarios"
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 function Copyright() {
@@ -173,15 +174,14 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
             <Grid item xs={12}>
-              <Paper className={fixedHeightPaper}>
-                       
-                  
+              <Paper className={fixedHeightPaper}> 
                <BrowserRouter>
                 <Switch>
                   <Route exact path="/home" component={Mapa}/>
                   <Route exact path="/home/EditarEstacion" component={EditarEstacion}/>
                   <Route exact path="/home/EliminarEstacion" component={EliminarEstacion}/>
                   <Route exact path="/home/AgregarEstacion" component={AgregarEstacion}/>
+                  <Route exact path="/home/AgregarUsuario" component={AgregarUsuario}/>
                 </Switch>
               </BrowserRouter>
 

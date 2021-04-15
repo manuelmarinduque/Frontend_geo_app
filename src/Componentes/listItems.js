@@ -93,25 +93,16 @@ export default function NestedList() {
       </ListItem>
       <Collapse in={open1} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItem button className={classes.nested}>
-            <ListItemIcon>
-              <PersonAddIcon />
-            </ListItemIcon>
-            {/* <ListItemText primary="Crear" /> */}
-            <UserFormModal />
-          </ListItem>
-          <ListItem button className={classes.nested}>
-            <ListItemIcon>
-              <EditIcon />
-            </ListItemIcon>
-            <ListItemText primary="editar" />
-          </ListItem>
-          <ListItem button className={classes.nested}>
-            <ListItemIcon>
-              <DeleteIcon />
-            </ListItemIcon>
-            <ListItemText primary="eliminar" />
-          </ListItem>
+          <li>
+            <Link href="/home/AgregarUsuario">
+              <ListItem button className={classes.nested}>
+                <ListItemIcon>
+                  <PersonAddIcon />
+                </ListItemIcon>
+                <ListItemText primary="Crear" />
+              </ListItem>
+            </Link>
+          </li>
         </List>
       </Collapse>
 
@@ -124,18 +115,15 @@ export default function NestedList() {
       </ListItem>
       <Collapse in={open2} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-
-        <li>
-            <Link href="/home/AgregarEstacion">
-              <ListItem button className={classes.nested}>
-                <ListItemIcon>
-                  <AddIcon />
-                </ListItemIcon>
-                <ListItemText primary="Crear" />
-              </ListItem>
-            </Link>
+          <li>
+            <ListItem button className={classes.nested}>
+              <ListItemIcon>
+                <AddIcon />
+              </ListItemIcon>
+              {/* <ListItemText primary="Crear" /> */}
+              <SedeFormModal />
+            </ListItem>
           </li>
-
           <li>
             <Link href="/home/EditarEstacion">
               <ListItem button className={classes.nested}>
@@ -146,7 +134,6 @@ export default function NestedList() {
               </ListItem>
             </Link>
           </li>
-
           <li>
             <Link href="/home/EliminarEstacion">
               <ListItem button className={classes.nested}>
@@ -158,7 +145,17 @@ export default function NestedList() {
             </Link>
           </li>
 
-        </List>        
+          <li>
+            <Link href="/home/Sedes">
+              <ListItem button className={classes.nested}>
+                <ListItemIcon>
+                  <DashboardIcon />
+                </ListItemIcon>
+                <ListItemText primary="Sedes" />
+              </ListItem>
+            </Link>
+          </li>
+        </List>
       </Collapse>
      
       <ListItem button onClick={handleClick3}>
@@ -170,12 +167,10 @@ export default function NestedList() {
       </ListItem>
       <Collapse in={open3} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-
           <li>
               <Curso />
           </li>
-
-        </List>        
+        </List>
       </Collapse>
 
       <ListItem button onClick={handleClick4}>
@@ -204,7 +199,6 @@ export default function NestedList() {
       </ListItem>
       <Collapse in={open5} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-
           <li>
             <Link href="/home/CrearGrupo">
               <ListItem button className={classes.nested}>
