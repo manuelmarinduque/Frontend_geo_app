@@ -27,7 +27,7 @@ class App extends Component {
 
   componentDidMount() {
     var data1 = "";
-    fetch("http://localhost:3500/station", {
+    fetch("http://localhost:5500/sede", {
       method: "GET",
       headers: {
         Accept: "application/json",

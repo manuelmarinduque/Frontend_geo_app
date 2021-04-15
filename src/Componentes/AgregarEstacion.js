@@ -61,23 +61,22 @@ class AgregarEstacion extends Component {
 
     render() {
         return (
-            <div class="wrapper fadeInDown">
+            <div class="wrapper fadeInDown" width="">
             <div id="formContent">
 
             <h2>Registro de Estaciones</h2>
 
               <form onSubmit={this.enviarDatos}>
-                  <Label>Nombre</Label>
+                <div><Label>Nombre</Label></div>  
                 <input
                   type="text"
                   id="name"
                   class="fadeIn second"
                   name="name"
                   placeholder="Nombre de la estacion de gasolina"
-                  value={this.state.nombre} onChange={this.onChange}
-                  
+                  value={this.state.nombre} onChange={this.onChange} 
                 />
-                 <Label>Direccion</Label>
+                 <div><Label>Direccion</Label></div>
                 <input
                   type="text"
                   id="address"
@@ -86,7 +85,7 @@ class AgregarEstacion extends Component {
                   placeholder="Direccion de la estacion de gasolina "
                   value={this.state.direccion} onChange={this.onChange}
                 />
-                 <Label>Telefono</Label>
+                 <div><Label>Telefono</Label></div>
                 <input
                   type="text"
                   id="phone"
@@ -95,7 +94,7 @@ class AgregarEstacion extends Component {
                   placeholder="Telefono de la estacion de gasolina"
                   value={this.state.telefono} onChange={this.onChange}
                 />
-                <Label>Latitudes</Label>
+                <div><Label>Latitudes</Label></div>
                 <input
                   type="text"
                   id="latitude"
@@ -104,7 +103,7 @@ class AgregarEstacion extends Component {
                   placeholder="Latitud de la estacion"
                   value={this.state.latitud} onChange={this.onChange}
                 />
-                <Label>Longitud</Label>
+                <div><Label>Longitud</Label></div>
                 <input
                   type="text"
                   id="longitude"
