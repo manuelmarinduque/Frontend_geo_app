@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { Modal } from "reactstrap";
 import edit from "../assets/images/editSede.webp";
-import jwt from "jsonwebtoken";
-
-import axios from "axios";
 
 class SedeFormModal extends Component {
   constructor(props) {
@@ -17,7 +14,7 @@ class SedeFormModal extends Component {
       latitude: this.props.data.latitud,
       longitude: this.props.data.longitud,
       city: this.props.data.ciudad,
-      phone:this.props.data.telefono,
+      phone: this.props.data.telefono,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -25,27 +22,28 @@ class SedeFormModal extends Component {
   }
 
   enviarSede(e) {
-    var data1 =""
     e.preventDefault();
-    fetch("http://localhost:5500/sede/", {
+    fetch("http://localhost:3500/sede/actualizar_sede/", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer 3ywg&hsnxu43o9+iaz&sdtr"
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
       },
-      body: JSON.stringify({id_sede: this.state.data.id_sede, 
-                           nombre_sede: this.state.name,
-                           id_empresa: this.state.data.id_empresa, 
-                           direccion: this.state.data.direccion,
-                           latitud: this.state.latitude, 
-                           longitud:this.state.longitude,
-                           telefono:this.state.phone,
-                           ciudad:this.state.city}),
+      body: JSON.stringify({
+        id_sede: this.state.data.id_sede,
+        nombre_sede: this.state.name,
+        id_empresa: this.state.data.id_empresa,
+        direccion: this.state.data.direccion,
+        latitud: this.state.latitude,
+        longitud: this.state.longitude,
+        telefono: this.state.phone,
+        ciudad: this.state.city,
+      }),
     }) // Aqui va la ruta
       .then((res) => res.json())
-      .catch(error => console.error('Error: ',error))
-      alert('sede modificada' + this.state.name); 
-  };
+      .catch((error) => console.error("Error: ", error));
+    alert("sede modificada" + this.state.name);
+  }
 
   toggle = () => {
     this.setState({
@@ -66,14 +64,14 @@ class SedeFormModal extends Component {
       <div
         className="container"
         title="Edit"
-        style={{ padding: "10px", maxWidth: "720px" }}
+        // style={{ padding: "10px", maxWidth: "720px" }}
       >
         <button
           className="btn"
           onClick={this.toggle}
-          style={{ borderRadius: "50%" }}
+          style={{ borderRadius: "50%", padding: "1px" }}
         >
-          <img src={edit} alt="" height="30px" />
+          <img src={edit} alt="" height="25px" />
         </button>
         <Modal
           isOpen={this.state.modal}
@@ -156,7 +154,9 @@ class SedeFormModal extends Component {
                             </div>
                           </div>
                           <div className="mb-3 row">
-                            <div className="col-sm-3 col-form-label">telefono</div>
+                            <div className="col-sm-3 col-form-label">
+                              telefono
+                            </div>
                             <div className="col-sm-9">
                               <input
                                 type="text"
