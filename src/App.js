@@ -21,31 +21,31 @@ let DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 class App extends Component {
-  state = {
-    marcadores: [],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      marcadores: [],
+    };
+  }
 
   componentDidMount() {
     var data1 = "";
-    fetch("http://localhost:5500/sede", {
+    fetch("http://localhost:3500/sede/obtener_sedes", {
       method: "GET",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
       },
     }) // Aqui va la ruta
-      .then((res) => res.json())
-      .then((data) => {
-        data1 = jwt.verify(
-          data.token,
-          "3ywg&hsnxu43o9+iaz&sdtr",
-          function (err, dat) {
-            return dat;
-          }
-        );
-        this.setState({ marcadores: Object.entries(data1)[0][1] });
+      .then((res) => {
+        res.json().then((data) => {
+          this.setState({ marcadores: data.data });
+        });
       })
-      .catch(console.log);
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   render() {

@@ -72,7 +72,7 @@ export default function NestedList() {
       </ListItem>
       <Collapse in={open1} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-        <li>
+          <li>
             <Link href="/home/AgregarUsuario">
               <ListItem button className={classes.nested}>
                 <ListItemIcon>
@@ -81,7 +81,7 @@ export default function NestedList() {
                 <ListItemText primary="Crear" />
               </ListItem>
             </Link>
-         </li>
+          </li>
         </List>
       </Collapse>
 
@@ -94,15 +94,14 @@ export default function NestedList() {
       </ListItem>
       <Collapse in={open2} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-        <li>
-            <Link href="/home/AgregarEstacion">
-              <ListItem button className={classes.nested}>
-                <ListItemIcon>
-                  <AddIcon />
-                </ListItemIcon>
-                <ListItemText primary="Crear" />
-              </ListItem>
-            </Link>
+          <li>
+            <ListItem button className={classes.nested}>
+              <ListItemIcon>
+                <AddIcon />
+              </ListItemIcon>
+              {/* <ListItemText primary="Crear" /> */}
+              <SedeFormModal />
+            </ListItem>
           </li>
           <li>
             <Link href="/home/EditarEstacion">
@@ -134,7 +133,7 @@ export default function NestedList() {
                 <ListItemText primary="Sedes" />
               </ListItem>
             </Link>
-          </li>          
+          </li>
         </List>
       </Collapse>
 
@@ -147,7 +146,6 @@ export default function NestedList() {
       </ListItem>
       <Collapse in={open2} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-
           <li>
             <Link href="/home/Cusros">
               <ListItem button className={classes.nested}>
@@ -158,8 +156,7 @@ export default function NestedList() {
               </ListItem>
             </Link>
           </li>
-
-        </List>        
+        </List>
       </Collapse>
 
       <ListItem button onClick={handleClick2}>
@@ -171,7 +168,6 @@ export default function NestedList() {
       </ListItem>
       <Collapse in={open2} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-
           <li>
             <Link href="/home/Profesore">
               <ListItem button className={classes.nested}>
@@ -182,10 +178,8 @@ export default function NestedList() {
               </ListItem>
             </Link>
           </li>
-        </List>        
+        </List>
       </Collapse>
-      
-
     </List>
-  );    
+  );
 }
