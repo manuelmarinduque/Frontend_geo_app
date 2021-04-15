@@ -124,6 +124,7 @@ export default function NestedList() {
               </ListItem>
             </Link>
           </li>
+
           <li>
             <Link href="/home/Sedes">
               <ListItem button className={classes.nested}>
@@ -136,6 +137,55 @@ export default function NestedList() {
           </li>          
         </List>
       </Collapse>
+
+      <ListItem button onClick={handleClick2}>
+        <ListItemIcon>
+          <LocalGasStationIcon />
+        </ListItemIcon>
+        <ListItemText primary="Cursos" />
+        {open2 ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={open2} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+
+          <li>
+            <Link href="/home/Cusros">
+              <ListItem button className={classes.nested}>
+                <ListItemIcon>
+                  <AddIcon />
+                </ListItemIcon>
+                <ListItemText primary="Cursos" />
+              </ListItem>
+            </Link>
+          </li>
+
+        </List>        
+      </Collapse>
+
+      <ListItem button onClick={handleClick2}>
+        <ListItemIcon>
+          <LocalGasStationIcon />
+        </ListItemIcon>
+        <ListItemText primary="Profesores" />
+        {open2 ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={open2} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+
+          <li>
+            <Link href="/home/Profesore">
+              <ListItem button className={classes.nested}>
+                <ListItemIcon>
+                  <AddIcon />
+                </ListItemIcon>
+                <ListItemText primary="Profesores" />
+              </ListItem>
+            </Link>
+          </li>
+        </List>        
+      </Collapse>
+      
+
     </List>
-  );
+  );    
 }

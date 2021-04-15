@@ -33,7 +33,7 @@ class EditarEstacion extends Component {
 
 
     obtenerEstaciones() {
-        fetch('http://localhost:5500/station/stations'
+        fetch('http://localhost:3500/station/stations'
                 , {
                       method: "GET",
                       mode: "no-cors",
