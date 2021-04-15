@@ -51,17 +51,17 @@ const Marcadores = ({ marcadores }) => {
               <td>
                 <EditSedeModal data={marcadores} />
               </td>
-              <td>@mdo</td>
+              <td>boton</td>
             </tr>
             <tr>
               <td>Curso</td>
-              <td>Thornton</td>
-              <td>@fat</td>
+              <td>boton</td>
+              <td>boton</td>
             </tr>
             <tr>
               <td>Profesor</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
+              <td>boton</td>
+              <td>boton</td>
             </tr>
           </tbody>
         </table>

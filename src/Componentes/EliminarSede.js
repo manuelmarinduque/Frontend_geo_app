@@ -29,6 +29,8 @@ class EliminarSede extends Component {
     });
   };
 
+  handleClick = async () => {};
+
   render() {
     return (
       <div className="container" title="Delete">
