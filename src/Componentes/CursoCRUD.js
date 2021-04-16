@@ -26,9 +26,16 @@ class Curso extends React.Component {
         modalInsertar: false,
         modalInsertar1: false,
         form: {
-            id: "",
-            personaje: "",
-            anime: "",
+            numero_doc: "",
+            nombre_profesor: "",
+            direccion_residencia:"",
+            numero_celular: "",
+            genero:"",
+            nacionalidad:"",
+            fecha_ingreso:"",
+            tipo_contrato:"",
+            especialidad:"",
+            id_sede:"",
         },
     };
 

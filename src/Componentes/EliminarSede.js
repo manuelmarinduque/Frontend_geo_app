@@ -12,9 +12,13 @@ class EliminarSede extends Component {
     super(props);
     this.state = {
       confirm: false,
+      data = this.props.data,
     };
   }
 
+  
+  
+  
   toggle = () => {
     this.setState({
       error: false,

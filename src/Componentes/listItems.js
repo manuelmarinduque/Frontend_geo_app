@@ -22,6 +22,7 @@ import AddIcon from "@material-ui/icons/Add";
 import Link from "@material-ui/core/Link";
 import Curso from "./CursoCRUD";
 import Profesores from "./profesorCRUD";
+import SchoolIcon from '@material-ui/icons/School';
 
 
 // components
@@ -108,7 +109,7 @@ export default function NestedList() {
 
       <ListItem button onClick={handleClick2}>
         <ListItemIcon>
-          <LocalGasStationIcon />
+          <SchoolIcon />
         </ListItemIcon>
         <ListItemText primary="Estaciones" />
         {open2 ? <ExpandLess /> : <ExpandMore />}
@@ -123,37 +124,6 @@ export default function NestedList() {
               {/* <ListItemText primary="Crear" /> */}
               <SedeFormModal />
             </ListItem>
-          </li>
-          <li>
-            <Link href="/home/EditarEstacion">
-              <ListItem button className={classes.nested}>
-                <ListItemIcon>
-                  <EditIcon />
-                </ListItemIcon>
-                <ListItemText primary="Editar" />
-              </ListItem>
-            </Link>
-          </li>
-          <li>
-            <Link href="/home/EliminarEstacion">
-              <ListItem button className={classes.nested}>
-                <ListItemIcon>
-                  <DeleteIcon />
-                </ListItemIcon>
-                <ListItemText primary="Borrar" />
-              </ListItem>
-            </Link>
-          </li>
-
-          <li>
-            <Link href="/home/Sedes">
-              <ListItem button className={classes.nested}>
-                <ListItemIcon>
-                  <DashboardIcon />
-                </ListItemIcon>
-                <ListItemText primary="Sedes" />
-              </ListItem>
-            </Link>
           </li>
         </List>
       </Collapse>
