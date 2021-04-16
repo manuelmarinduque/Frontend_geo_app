@@ -3,7 +3,8 @@ import React from "react";
 import { Marker, Popup } from "react-leaflet";
 import EditSedeModal from "./EditSedeModal";
 import EliminarSede from "./EliminarSede";
-import VerModal from "./VerModal";
+import VerModalCurso from "./VerModalCurso";
+import VerModalProfesor from "./VerModalProfesor";
 
 const Marcadores = ({ marcadores }) => {
   const popupHead = {
@@ -19,7 +20,6 @@ const Marcadores = ({ marcadores }) => {
   return marcadores.map((marcador, i) => (
     <Marker key={i} position={[marcador.latitud, marcador.longitud]}>
       <Popup style={{ minWidth: "100px" }}>
-        {console.log(marcador)}
         <b style={popupHead}>Nombre:</b>{" "}
         <span style={popupText}>{marcador.nombre_sede}.</span> <br />
         <b style={popupHead}>Direccion:</b>{" "}
@@ -51,12 +51,14 @@ const Marcadores = ({ marcadores }) => {
             <tr>
               <td>Curso</td>
               <td colSpan="2">
-                <VerModal title="Cursos" data={marcador} />
+                <VerModalCurso title="Cursos" data={marcador} />
               </td>
             </tr>
             <tr>
               <td>Profesor</td>
-              <td colSpan="2">boton</td>
+              <td colSpan="2">
+                <VerModalProfesor title="Profesores" data={marcador} />
+              </td>
             </tr>
           </tbody>
         </table>

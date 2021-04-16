@@ -1,14 +1,10 @@
 import React, { Component } from "react";
 import { Modal } from "reactstrap";
-import edit from "../assets/images/editSede.webp";
-
-// axios
-import axios from "axios";
 
 // components
-import TablaModalCurso from "./TablaModalCurso";
+import TablaModalProfesor from "./TablaModalProfesor";
 
-class VerModal extends Component {
+class VerModalProfesor extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -60,8 +56,8 @@ class VerModal extends Component {
                       </h4>
                     </div>
                     <div className="card-body">
-                      <TablaModalCurso
-                        title="Editar Sede"
+                      <TablaModalProfesor
+                        title="Editar Profesor"
                         data={this.state.data}
                       />
                     </div>
@@ -95,4 +91,4 @@ class VerModal extends Component {
   }
 }
 
-export default VerModal;
+export default VerModalProfesor;

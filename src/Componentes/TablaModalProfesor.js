@@ -3,34 +3,41 @@ import { Modal } from "reactstrap";
 
 // axios
 import axios from "axios";
+import { CropDinSharp } from "@material-ui/icons";
 
-class TablaModalCurso extends Component {
+class TablaModalProfesor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      nombre_curso: "",
-      codigo_curso: "",
-      descripcion: "",
-      creditos: "",
+      nombre_profesor: "",
+      numero_documento: "",
+      direccion_residencia: "",
+      numero_celular: "",
+      genero: "",
+      nacionalidad: "",
+      fecha_ingreso: "",
+      tipo_contrato: "",
+      especialidad: "",
       modal1: false,
       modal2: false,
       confirm: false,
       title: this.props.title,
-      cursos: [],
-      id_curso: "",
-      unCurso: {},
+      profesores: [],
+      id_profesor: "",
+      unProfesor: {},
       sede: this.props.data.id_sede,
     };
   }
 
-  infoCurso = (id_curso) => {
+  infoProfesor = (id_profesor) => {
     this.setState({
-      unCurso: {},
+      unProfesor: {},
     });
-    this.state.cursos.forEach((curso) => {
-      if (curso.id_curso == id_curso) {
+
+    this.state.profesores.forEach((profesor) => {
+      if (profesor.id_profesor == id_profesor) {
         this.setState({
-          unCurso: curso,
+          unProfesor: profesor,
         });
         return;
       }
@@ -38,13 +45,10 @@ class TablaModalCurso extends Component {
   };
 
   toggle1 = (e) => {
-    try {
-      this.infoCurso(e.target.id);
-    } catch (e) {
-      console.log("null");
-    }
+    this.infoProfesor(e.target.id);
+
     this.setState({
-      id_curso: e.target.id,
+      id_profesor: e.target.id,
       error: false,
       errorMessage: "",
       modal1: !this.state.modal1,
@@ -63,63 +67,62 @@ class TablaModalCurso extends Component {
     try {
       const response = await axios({
         method: "GET",
-        url: "http://localhost:3500/curso/obtener_cursos_sede/",
+        url: "http://localhost:3500/profesor/obtener_profesores/",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${window.localStorage.getItem("token")}`,
         },
       });
-      const cursos = response.data.data;
-      let cursos_sede = [];
-      cursos.map((curso) => {
-        if (curso.id_sede == this.state.sede) {
-          cursos_sede.push(curso);
+      const profesores = response.data.data;
+      let profesor_sede = [];
+      profesores.map((profesor) => {
+        if (profesor.id_sede == this.state.sede) {
+          profesor_sede.push(profesor);
         }
       });
+
       this.setState({
-        cursos: cursos_sede,
+        profesores: profesor_sede,
       });
-      console.log(this.state.cursos);
+      console.log(this.state.profesores);
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  async componentWillUnmount() {
-    console.log("componente se esta desmontando");
-    await this.setState({
-      cursos: [],
-    });
-  }
-
   handleClick1 = async () => {
     try {
       const response = await axios({
-        url: "http://localhost:3500/curso/actualizar_curso",
+        url: "http://localhost:3500/profesor/actualizar_profesor",
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${window.localStorage.getItem("token")}`,
         },
         data: {
-          nombre_curso:
-            this.state.nombre_curso == ""
-              ? this.state.unCurso.nombre_curso
-              : this.state.nombre_curso,
-          codigo_curso:
-            this.state.codigo_curso == ""
-              ? this.state.unCurso.codigo_curso
-              : this.state.codigo_curso,
-          descripcion:
-            this.state.descripcion == ""
-              ? this.state.unCurso.descripcion
-              : this.state.descripcion,
-          creditos:
-            this.state.creditos == ""
-              ? this.state.unCurso.creditos
-              : this.state.creditos,
+          nombre_profesor:
+            this.state.nombre_profesor == ""
+              ? this.state.unProfesor.nombre_profesor
+              : this.state.nombre_profesor,
+          numero_documento:
+            this.state.numero_documento == ""
+              ? this.state.unProfesor.numero_documento
+              : this.state.numero_documento,
+          direccion_residencia:
+            this.state.direccion_residencia == ""
+              ? this.state.unProfesor.direccion_residencia
+              : this.state.direccion_residencia,
+          numero_celular:
+            this.state.numero_celular == ""
+              ? this.state.unProfesor.numero_celular
+              : this.state.numero_celular,
+          genero: this.state.unProfesor.genero,
+          nacionalidad: this.state.unProfesor.nacionalidad,
+          fecha_ingreso: this.state.unProfesor.fecha_ingreso,
+          tipo_contrato: this.state.unProfesor.tipo_contrato,
+          especialidad: this.state.unProfesor.especialidad,
           id_sede: this.state.sede,
-          id_curso: this.state.id_curso,
+          id_profesor: this.state.id_profesor,
         },
       });
       if (response.status == 200) {
@@ -127,8 +130,6 @@ class TablaModalCurso extends Component {
         this.setState({
           modal1: !this.state.modal1,
         });
-      } else {
-        alert(response.data.message);
       }
     } catch (err) {
       console.error(err.message);
@@ -136,21 +137,21 @@ class TablaModalCurso extends Component {
   };
 
   handleClick2 = async () => {
-    console.log(this.state.id_curso);
+    console.log(this.state.id_profesor);
     try {
       const response = await axios({
         method: "DELETE",
-        url: "http://localhost:3500/curso/eliminar_curso",
+        url: "http://localhost:3500/profesor/eliminar_profesor",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${window.localStorage.getItem("token")}`,
         },
-        data: { id_curso: this.state.id_curso },
+        data: { id_profesor: this.state.id_profesor },
       });
-      if (response.status === 200) {
-        this.toggle2();
+      if (response.status == 200) {
+        this.toggle2({});
       } else {
-        alert(response.data.message);
+        alert("El ID del profesor dado no existe");
       }
       console.log(response.data);
     } catch (err) {
@@ -195,8 +196,10 @@ class TablaModalCurso extends Component {
                             </label>
                             <div className="col-sm-8">
                               <input
-                                name="nombre_curso"
-                                defaultValue={this.state.unCurso.nombre_curso}
+                                name="nombre_profesor"
+                                defaultValue={
+                                  this.state.unProfesor.nombre_profesor
+                                }
                                 className="form-control"
                                 onChange={this.handleChange}
                               />
@@ -204,12 +207,14 @@ class TablaModalCurso extends Component {
                           </div>
                           <div className="mb-3 row">
                             <label className="col-sm-4 col-form-label">
-                              Codigo
+                              Documento
                             </label>
                             <div className="col-sm-8">
                               <input
-                                name="codigo_curso"
-                                defaultValue={this.state.unCurso.codigo_curso}
+                                name="numero_documento"
+                                defaultValue={
+                                  this.state.unProfesor.numero_documento
+                                }
                                 className="form-control"
                                 onChange={this.handleChange}
                               />
@@ -217,12 +222,14 @@ class TablaModalCurso extends Component {
                           </div>
                           <div className="mb-3 row">
                             <label className="col-sm-4 col-form-label">
-                              Descripcion
+                              Direccion
                             </label>
                             <div className="col-sm-8">
                               <input
-                                name="descripcion"
-                                defaultValue={this.state.unCurso.descripcion}
+                                name="direccion_residencia"
+                                defaultValue={
+                                  this.state.unProfesor.direccion_residencia
+                                }
                                 className="form-control"
                                 onChange={this.handleChange}
                               />
@@ -230,12 +237,14 @@ class TablaModalCurso extends Component {
                           </div>
                           <div className="mb-3 row">
                             <div className="col-sm-4 col-form-label">
-                              Creditos
+                              Celular
                             </div>
                             <div className="col-sm-8">
                               <input
-                                name="creditos"
-                                defaultValue={this.state.unCurso.creditos}
+                                name="numero_celular"
+                                defaultValue={
+                                  this.state.unProfesor.numero_celular
+                                }
                                 className="form-control"
                                 onChange={this.handleChange}
                               />
@@ -299,17 +308,19 @@ class TablaModalCurso extends Component {
                       className="card-header bg-transparent"
                       style={{ textAlign: "center" }}
                     >
-                      <h4 className="text-center text-info">Eliminar Curso</h4>
+                      <h4 className="text-center text-info">
+                        Eliminar Profesor
+                      </h4>
                     </div>
                     <div className="card-body">
                       <div className="container" style={{ padding: "10px" }}>
                         <label htmlFor="">
-                          Confirme el ID del curso que desea eliminar.
+                          Confirme el ID del Profesor que desea eliminar.
                         </label>
                         <input
-                          name="id_curso"
+                          name="id_profesor"
                           onChange={this.handleChange}
-                          defaultValue={this.state.id_curso}
+                          defaultValue={this.state.id_profesor}
                         />
                       </div>
                     </div>
@@ -356,23 +367,25 @@ class TablaModalCurso extends Component {
             <tr>
               <th scope="col">ID</th>
               <th scope="col">Nombre</th>
-              <th scope="col">Código</th>
-              <th scope="col">Créditos</th>
-              <td colSpan="2">Acción</td>
+              <th scope="col">Documento</th>
+              <th scope="col">Direccion</th>
+              <th scope="col">Celular</th>
+              <td colSpan="2">Acciones</td>
             </tr>
           </thead>
           <tbody>
-            {this.state.cursos.map((curso) => {
+            {this.state.profesores.map((profesor) => {
               return (
-                <tr key={curso.id_curso}>
-                  <th scope="row">{curso.id_curso}</th>
-                  <th>{curso.nombre_curso}</th>
-                  <th>{curso.codigo_curso}</th>
-                  <th>{curso.creditos}</th>
+                <tr key={profesor.id_profesor}>
+                  <th scope="row">{profesor.id_profesor}</th>
+                  <th>{profesor.nombre_profesor}</th>
+                  <th>{profesor.numero_documento}</th>
+                  <th>{profesor.direccion_residencia}</th>
+                  <th>{profesor.numero_celular}</th>
                   <th>
                     <button
-                      key={curso.id_curso}
-                      id={curso.id_curso}
+                      key={profesor.id_profesor}
+                      id={profesor.id_profesor}
                       className="btn btn-sm btn-warning block"
                       onClick={this.toggle1}
                     >
@@ -381,6 +394,7 @@ class TablaModalCurso extends Component {
                   </th>
                   <th>
                     <button
+                      id={profesor.id_profesor}
                       title="Eliminar"
                       className="btn btn-sm btn-danger block"
                       onClick={this.toggle2}
@@ -400,4 +414,4 @@ class TablaModalCurso extends Component {
   }
 }
 
-export default TablaModalCurso;
+export default TablaModalProfesor;
