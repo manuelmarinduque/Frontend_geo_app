@@ -86,13 +86,17 @@ class Login extends Component {
                 onChange={this.handleChange}
               />
 
-              <input type="submit" class="fadeIn fourth" value="Log In" />
+              <input type="submit" class="fadeIn fourth" value="Log In"/>
             </form>
 
             {/* <!-- Remind Passowrd --> */}
             <div id="formFooter">
               <a class="underlineHover" href="#">
                 Forgot Password?
+              </a>
+              <br></br>
+              <a class="underlineHover" href="/registro">
+                  Registrarse    
               </a>
             </div>
           </div>

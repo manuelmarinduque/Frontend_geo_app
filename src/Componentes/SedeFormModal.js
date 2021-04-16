@@ -36,13 +36,6 @@ class SedeFormModal extends Component {
 
     socket.emit('sede:crear_sede', datos);
 
-    socket.emit('sede:listar_sedes');
-
-    socket.on('sede:listar_sedes',datos =>{
-
-    
-    })
-
   }
     /*
     fetch("http://localhost:5500/sede/crear_sede/", {
