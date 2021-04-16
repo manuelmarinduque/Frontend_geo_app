@@ -10,6 +10,7 @@ import {
     ModalFooter,
 } from "reactstrap";
 
+/*
 const data = [
     { id: 1, personaje: "Naruto", anime: "Naruto" },
     { id: 2, personaje: "Goku", anime: "Dragon Ball" },
@@ -18,9 +19,10 @@ const data = [
     { id: 5, personaje: "Edward Elric", anime: "Fullmetal Alchemist: Brotherhood" },
     { id: 6, personaje: "Seto Kaiba", anime: "Yu-Gi-Oh!" },
 ];
+*/
 
 class Curso extends React.Component {
-    state = {
+  /*  state = {
         data: data,
         modalActualizar: false,
         modalInsertar: false,
@@ -31,6 +33,26 @@ class Curso extends React.Component {
             anime: "",
         },
     };
+    se cambia por el de abajo
+   */
+    constructor(props) {
+        super(props);
+        this.state = {
+            modalActualizar: false,
+            modalInsertar: false,
+            modalInsertar1: false,
+            data: this.props.data,
+            id_curso: this.props.data.id_curso,
+            nombreCurso: this.props.data.nombre_curso,
+            codigoCurso: this.props.data.codigo_curso,
+            descripcionCurso: this.props.data.descripcion,
+            creditosCurso: this.props.data.creditos,
+            id_sede:this.props.data.id_sede,
+        };
+    
+        this.handleChange = this.handleChange.bind(this);
+        this.editar = this.editar.bind(this);
+      }
 
     mostrarModalActualizar = (dato) => {
         this.setState({
@@ -63,6 +85,8 @@ class Curso extends React.Component {
         this.setState({ modalInsertar1: false });
     };
 
+
+/*
     editar = (dato) => {
         var contador = 0;
         var arreglo = this.state.data;
@@ -75,6 +99,32 @@ class Curso extends React.Component {
         });
         this.setState({ data: arreglo, modalActualizar: false });
     };
+    se cambio por el de abajo
+*/
+
+editar (e) {
+    e.preventDefault();
+    fetch("http://localhost:3500/curso/actualizar_curso", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({id_curso: this.state.data.id_curso, 
+                           nombre_curso: this.state.nombre_curso,
+                           codigo_curso: this.state.codigo_curso, 
+                           descripcion: this.state.descripcion,
+                           creditos: this.state.creditos, 
+                           id_sede: this.state.data.id_sede,
+                           }),
+    }) // Aqui va la ruta
+      .then((res) => res.json())
+      .catch(error => console.error('Error: ',error))
+      alert('Curso modificado' + this.state.nombre_curso); 
+  };
+
+
+  
 
     eliminar = (dato) => {
         var opcion = window.confirm("Estás Seguro que deseas Eliminar el elemento " + dato.id);
@@ -99,6 +149,7 @@ class Curso extends React.Component {
         this.setState({ modalInsertar: false, data: lista });
     }
 
+    /*
     handleChange = (e) => {
         this.setState({
             form: {
@@ -107,6 +158,14 @@ class Curso extends React.Component {
             },
         });
     };
+    se cambia por el de abajo
+    */
+
+    handleChange = (e) => {
+        this.setState({
+          [e.target.name]: e.target.value,
+        });
+      };
 
     render() {
 
@@ -130,10 +189,10 @@ class Curso extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="personaje"
+                                    name="nombreCurso"
                                     type="text"
                                     onChange={this.handleChange}
-                                    value={this.state.form.personaje}
+                                    value={this.state.nombreCurso}
                                 />
                             </FormGroup>
 
@@ -143,10 +202,10 @@ class Curso extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="codigoCurso"
                                     type="text"
                                     onChange={this.handleChange}
-                                    value={this.state.form.anime}
+                                    value={this.state.codigoCurso}
                                 />
                             </FormGroup>
 
@@ -156,10 +215,10 @@ class Curso extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="descripcionCurso"
                                     type="text"
                                     onChange={this.handleChange}
-                                    value={this.state.form.anime}
+                                    value={this.state.descripcionCurso}
                                 />
                             </FormGroup>
 
@@ -169,10 +228,10 @@ class Curso extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="creditosCurso"
                                     type="text"
                                     onChange={this.handleChange}
-                                    value={this.state.form.anime}
+                                    value={this.state.creditosCurso}
                                 />
                             </FormGroup>
                         </ModalBody>
@@ -180,7 +239,8 @@ class Curso extends React.Component {
                         <ModalFooter>
                             <Button
                                 color="primary"
-                                onClick={() => this.editar(this.state.form)}
+                              //  onClick={() => this.editar(this.state.form)}
+                              onClick={this.editar}
                             >
                                 Editar
                             </Button>
@@ -195,7 +255,7 @@ class Curso extends React.Component {
 
 
 
-                    <Modal isOpen={this.state.modalInsertar}>
+                    <Modal isOpen={this.state.modalInsertar}>   
 
                         <ModalHeader>
                             <div><h3>Cursos</h3></div>
@@ -218,10 +278,9 @@ class Curso extends React.Component {
                                         </thead>
 
                                         <tbody>
-                                            {this.state.data.map((dato) => (
+                                            {this.state.data.map((dato) => (     /* Se cambia esta lineas */
                                                 <tr key={dato.id}>
-                                                    <td>{dato.id}</td>
-                                                    <td>{dato.personaje}</td>
+                                                    <td>{dato.nombre_curso}</td>
                                                     <td>
                                                         <Button
                                                             color="primary"
@@ -271,7 +330,7 @@ class Curso extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="personaje"
+                                    name="nombreCurso"
                                     type="text"
                                     onChange={this.handleChange}
                                 />
@@ -283,7 +342,7 @@ class Curso extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="codigoCurso"
                                     type="text"
                                     onChange={this.handleChange}
                                 />
@@ -295,7 +354,7 @@ class Curso extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="descripcionCurso"
                                     type="text"
                                     onChange={this.handleChange}
                                 />
@@ -307,7 +366,7 @@ class Curso extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="creditosCurso"
                                     type="text"
                                     onChange={this.handleChange}
                                 />

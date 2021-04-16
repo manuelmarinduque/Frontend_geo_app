@@ -21,7 +21,7 @@ const data = [
 
 class Grupo extends React.Component {
     state = {
-        data: data,
+ /*       data: data,
         modalActualizar: false,
         modalInsertar: false,
         modalInsertar1: false,
@@ -31,6 +31,26 @@ class Grupo extends React.Component {
             anime: "",
         },
     };
+*/
+    constructor(props) {
+        super(props);
+        this.state = {
+            modalActualizar: false,
+            modalInsertar: false,
+            modalInsertar1: false,
+            data: this.props.data,
+            id_grupo: this.props.data.id_grupo,
+            codigo_grupo: this.props.data.codigo_grupo,
+            semestre: this.props.data.semestre,
+            cupo_estudiantes: this.props.data.cupo_estudiantes,
+            total_estudiantes: this.props.data.total_estudiantes,
+            id_sede:this.props.data.id_sede,
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.editar = this.editar.bind(this);
+    }
+
 
     mostrarModalActualizar = (dato) => {
         this.setState({
@@ -131,10 +151,10 @@ class Grupo extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="personaje"
+                                    name="codigo_grupo"
                                     type="text"
                                     onChange={this.handleChange}
-                                    value={this.state.form.personaje}
+                                    value={this.state.codigo_grupo}
                                 />
                             </FormGroup>
 
@@ -144,10 +164,10 @@ class Grupo extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="semestre"
                                     type="text"
                                     onChange={this.handleChange}
-                                    value={this.state.form.anime}
+                                    value={this.state.semestre}
                                 />
                             </FormGroup>
 
@@ -157,10 +177,10 @@ class Grupo extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="cupo_estudiantes"
                                     type="text"
                                     onChange={this.handleChange}
-                                    value={this.state.form.anime}
+                                    value={this.state.cupo_estudiantes}
                                 />
                             </FormGroup>
 
@@ -170,10 +190,10 @@ class Grupo extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="total_estudiantes"
                                     type="text"
                                     onChange={this.handleChange}
-                                    value={this.state.form.anime}
+                                    value={this.state.total_estudiantes}
                                 />
                             </FormGroup>
                         </ModalBody>
@@ -213,7 +233,7 @@ class Grupo extends React.Component {
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Codigo Grupo</th>
+                                                <th>Cod. Grupo</th>
                                                 <th>Acción</th>
                                             </tr>
                                         </thead>
@@ -221,8 +241,7 @@ class Grupo extends React.Component {
                                         <tbody>
                                             {this.state.data.map((dato) => (
                                                 <tr key={dato.id}>
-                                                    <td>{dato.id}</td>
-                                                    <td>{dato.personaje}</td>
+                                                    <td>{dato.codigo_grupo}</td>
                                                     <td>
                                                         <Button
                                                             color="primary"
@@ -272,7 +291,7 @@ class Grupo extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="personaje"
+                                    name="codigo_grupo"
                                     type="text"
                                     onChange={this.handleChange}
                                 />
@@ -284,7 +303,7 @@ class Grupo extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="semestre"
                                     type="text"
                                     onChange={this.handleChange}
                                 />
@@ -296,7 +315,7 @@ class Grupo extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="cupo_estudiantes"
                                     type="text"
                                     onChange={this.handleChange}
                                 />
@@ -308,7 +327,7 @@ class Grupo extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="total_estudiantes"
                                     type="text"
                                     onChange={this.handleChange}
                                 />

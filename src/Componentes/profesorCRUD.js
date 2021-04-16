@@ -20,6 +20,7 @@ const data = [
 ];
 
 class Profesor extends React.Component {
+ /*
     state = {
         data: data,
         modalActualizar: false,
@@ -31,8 +32,32 @@ class Profesor extends React.Component {
             anime: "",
         },
     };
+*/
+        constructor(props) {
+            super(props);
+            this.state = {
+                modalActualizar: false,
+                modalInsertar: false,
+                modalInsertar1: false,
+                data: this.props.data,
+                id_profesor: this.props.data.id_profesor,
+                nombreProfesor: this.props.data.nombre_profesor,
+                numeroDocumento: this.props.data.numero_documento,
+                direccionResidencia: this.props.data.direccion_residencia,
+                numeroCelular: this.props.data.numero_celular,
+                genero: this.props.data.genero,
+                nacionalidad: this.props.data.nacionalidad,
+                fechaIngreso: this.props.data.fecha_ingreso,
+                tipoContrato: this.props.data.tipo_contrato,
+                especialidad: this.props.data.especialidad,
+                id_sede:this.props.data.id_sede,
+            };
 
-    mostrarModalActualizar = (dato) => {
+            this.handleChange = this.handleChange.bind(this);
+            this.editar = this.editar.bind(this);
+        }
+
+    mostrarModalActualizar = (dato) => {   // revisar funcionamiento
         this.setState({
             form: dato,
             modalActualizar: true,
@@ -63,6 +88,7 @@ class Profesor extends React.Component {
         this.setState({ modalInsertar1: false });
     };
 
+    /*    codigo original donde se tomo 
     editar = (dato) => {
         var contador = 0;
         var arreglo = this.state.data;
@@ -107,6 +133,7 @@ class Profesor extends React.Component {
             },
         });
     };
+    */
 
     render() {
 
@@ -114,7 +141,7 @@ class Profesor extends React.Component {
             <>
                 <div className="container">
 
-                    <Button color="success" onClick={() => this.mostrarModalInsertar()}>Crear</Button>
+                    <Button color="success" onClick={() => this.mostrarModalInsertar()}>Profesor</Button>
 
 
                     <Modal isOpen={this.state.modalActualizar}>
@@ -130,10 +157,10 @@ class Profesor extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="personaje"
+                                    name="nombreProfesor"
                                     type="text"
                                     onChange={this.handleChange}
-                                    value={this.state.form.personaje}
+                                    value={this.state.nombreProfesor}
                                 />
                             </FormGroup>
 
@@ -143,10 +170,10 @@ class Profesor extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="numeroDocumento"
                                     type="text"
                                     onChange={this.handleChange}
-                                    value={this.state.form.anime}
+                                    value={this.state.numeroDocumento}
                                 />
                             </FormGroup>
 
@@ -156,10 +183,10 @@ class Profesor extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="direccionResidencia"
                                     type="text"
                                     onChange={this.handleChange}
-                                    value={this.state.form.anime}
+                                    value={this.state.direccionResidencia}
                                 />
                             </FormGroup>
 
@@ -169,10 +196,10 @@ class Profesor extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="numeroCelular"
                                     type="text"
                                     onChange={this.handleChange}
-                                    value={this.state.form.anime}
+                                    value={this.state.numeroCelular}
                                 />
                             </FormGroup>
 
@@ -182,10 +209,10 @@ class Profesor extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="genero"
                                     type="text"
                                     onChange={this.handleChange}
-                                    value={this.state.form.anime}
+                                    value={this.state.genero}
                                 />
                             </FormGroup>
 
@@ -195,10 +222,10 @@ class Profesor extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="nacionalidad"
                                     type="text"
                                     onChange={this.handleChange}
-                                    value={this.state.form.anime}
+                                    value={this.state.nacionalidad}
                                 />
                             </FormGroup>
 
@@ -208,10 +235,10 @@ class Profesor extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="fechaIngreso"
                                     type="text"
                                     onChange={this.handleChange}
-                                    value={this.state.form.anime}
+                                    value={this.state.fechaIngreso}
                                 />
                             </FormGroup>
 
@@ -221,10 +248,10 @@ class Profesor extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="tipoContrato"
                                     type="text"
                                     onChange={this.handleChange}
-                                    value={this.state.form.anime}
+                                    value={this.state.tipoContrato}
                                 />
                             </FormGroup>
 
@@ -234,10 +261,10 @@ class Profesor extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="especialidad"
                                     type="text"
                                     onChange={this.handleChange}
-                                    value={this.state.form.anime}
+                                    value={this.state.especialidad}
                                 />
                             </FormGroup>
 
@@ -287,9 +314,8 @@ class Profesor extends React.Component {
                                         <tbody>
                                             {this.state.data.map((dato) => (
                                                 <tr key={dato.id}>
-                                                    <td>{dato.id}</td>
-                                                    <td>{dato.personaje}</td>
-                                                    <td>{dato.anime}</td>
+                                                    <td>{dato.nombre_profesor}</td>
+                                                    <td>{dato.numero_documento}</td>
                                                     <td>
                                                         <Button
                                                             color="primary"
@@ -339,8 +365,9 @@ class Profesor extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="personaje"
+                                    name="nombreProfesor"
                                     type="text"
+                                    value={this.state.nombreProfesor}
                                     onChange={this.handleChange}
                                 />
                             </FormGroup>
@@ -351,8 +378,9 @@ class Profesor extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="numeroDocumento"
                                     type="text"
+                                    value={this.state.numeroDocumento}
                                     onChange={this.handleChange}
                                 />
                             </FormGroup>
@@ -365,6 +393,7 @@ class Profesor extends React.Component {
                                     className="form-control"
                                     name="anime"
                                     type="text"
+                                    value={this.state.direccion_residencia}
                                     onChange={this.handleChange}
                                 />
                             </FormGroup>
@@ -375,8 +404,9 @@ class Profesor extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="numeroCelular"
                                     type="text"
+                                    value={this.state.numeroCelular}
                                     onChange={this.handleChange}
                                 />
                             </FormGroup>
@@ -387,8 +417,9 @@ class Profesor extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="genero"
                                     type="text"
+                                    value={this.state.genero}
                                     onChange={this.handleChange}
                                 />
                             </FormGroup>
@@ -399,8 +430,9 @@ class Profesor extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="nacionalidad"
                                     type="text"
+                                    value={this.state.nacionalidad}
                                     onChange={this.handleChange}
                                 />
                             </FormGroup>
@@ -411,8 +443,9 @@ class Profesor extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="fechaIngreso"
                                     type="text"
+                                    value={this.state.fechaIngreso}
                                     onChange={this.handleChange}
                                 />
                             </FormGroup>
@@ -423,8 +456,9 @@ class Profesor extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="tipoContrato"
                                     type="text"
+                                    value={this.state.tipoContrato}
                                     onChange={this.handleChange}
                                 />
                             </FormGroup>
@@ -435,8 +469,9 @@ class Profesor extends React.Component {
                                 </label>
                                 <input
                                     className="form-control"
-                                    name="anime"
+                                    name="especialidad"
                                     type="text"
+                                    value={this.state.especialidad}
                                     onChange={this.handleChange}
                                 />
                             </FormGroup>
