@@ -28,7 +28,7 @@ class AgregarEstacion extends Component {
   enviarDatos(e) {
     var data1 = "";
     e.preventDefault();
-    const url = "http://localhost:3500/station/create_station";
+    const url = "http://localhost:5500/station/create_station";
     const data = {
       name: this.state.nombre,
       address: this.state.direccion,

@@ -3,6 +3,7 @@ import React from "react";
 
 import { Marker, Popup } from "react-leaflet";
 import EditSedeModal from "./EditSedeModal";
+import EliminarSede from "./EliminarSede";
 
 const Marcadores = ({ marcadores }) => {
   const popupContent = {
@@ -49,9 +50,10 @@ const Marcadores = ({ marcadores }) => {
             <tr>
               <td>Sede</td>
               <td>
-                <EditSedeModal data={marcadores} />
+                <EditSedeModal data={marcador} />
               </td>
-              <td>boton</td>
+              <td><EliminarSede data ={marcador} />
+              </td>
             </tr>
             <tr>
               <td>Curso</td>
