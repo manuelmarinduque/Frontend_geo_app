@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Modal } from "reactstrap";
+import add from "../assets/images/add.svg";
+import socket from "./socket";
 
 class SedeFormModal extends Component {
   constructor(props) {
@@ -8,8 +10,55 @@ class SedeFormModal extends Component {
       modal: false,
       error: false,
       errorMessage: "",
+      name: "",
+      latitude: "",
+      longitude: "",
+      city: "",
+      phone: "",
+      address:"",
     };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.enviarSede = this.enviarSede.bind(this);
   }
+
+  enviarSede(e) {
+    e.preventDefault();
+    const datos = {
+      nombre_sede: this.state.name,
+      id_empresa: 1,
+      direccion: this.state.address,
+      latitud: this.state.latitude,
+      longitud: this.state.longitude,
+      telefono: this.state.phone,
+      ciudad: this.state.city,
+    };
+
+    socket.emit('sede:crear_sede', datos);
+
+  }
+    /*
+    fetch("http://localhost:5500/sede/crear_sede/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        nombre_sede: this.state.name,
+        id_empresa: 1,
+        direccion: this.state.address,
+        latitud: this.state.latitude,
+        longitud: this.state.longitude,
+        telefono: this.state.phone,
+        ciudad: this.state.city,
+      }),
+    }) // Aqui va la ruta
+      .then((res) => res.json())
+      .catch((error) => console.error("Error: ", error));
+    alert("sede creada: " + this.state.name);
+  }
+*/
 
   toggle = () => {
     this.setState({
@@ -25,61 +74,19 @@ class SedeFormModal extends Component {
     });
   };
 
-  validateData = (e) => {
-    //   name
-    let nameRE = /[A-Za-z0-9]{2,}/;
-    if (!nameRE.test(this.state.name)) {
-      return { error: true, errorMessage: "Write a correct Name" };
-    }
-
-    // latitude and longitude
-    let latitudeRE = /^[0-9]+\.[0-9]+$/;
-    if (
-      !latitudeRE.test(this.state.latitude) ||
-      !latitudeRE.test(this.state.longitude)
-    ) {
-      return { error: true, errorMessage: "Write a correct latitude" };
-    }
-
-    let cityRE = /[A-Za-z]{2,20}/;
-    if (!cityRE.test(this.state.name)) {
-      return { error: true, errorMessage: "Write a correct City" };
-    }
-
-    let name = this.state.name;
-    let latitude = this.state.latitude;
-    let longitude = this.state.longitude;
-    let city = this.state.city;
-
-    const data = { name, latitude, longitude, city };
-
-    return { error: false, data };
-  };
-
-  handleClick = async () => {
-    const data = this.validateData();
-    console.log(this.state);
-    if (data.error) {
-      this.setState({ error: true, errorMessage: data.errorMessage });
-    } else {
-      const dataPost = data.data;
-      console.log(dataPost);
-      const post = ""; //post
-      if (post.error) {
-        this.setState({ error: true, errorMessage: data.errorMessage });
-      } else {
-        alert("Sede created");
-        this.toggle();
-      }
-    }
-  };
-
   render() {
     return (
-      <div className="container" style={{ padding: "10px", maxWidth: "720px" }}>
-        <button className="btn" onClick={this.toggle}>
-          Crear
-          {/* <img src={user} alt="" height="30px" /> */}
+      <div
+        className="container"
+        title="Edit"
+        // style={{ padding: "10px", maxWidth: "720px" }}
+      >
+        <button
+          className="btn"
+          onClick={this.toggle}
+          style={{ borderRadius: "50%", padding: "1px" }}
+        >
+          <img src={add} alt="" height="25px" />
         </button>
         <Modal
           isOpen={this.state.modal}
@@ -98,19 +105,20 @@ class SedeFormModal extends Component {
                       className="card-header bg-transparent"
                       style={{ textAlign: "center" }}
                     >
-                      Edit Sede
+                      Crear Sede
                     </div>
                     <div className="card-body">
                       <div className="container" style={{ padding: "10px" }}>
                         <form action="" className="form">
                           <div className="mb-3 row">
-                            <label className="col-sm-4 col-form-label">
-                              Name
+                            <label className="col-sm-3 col-form-label">
+                              Nombre
                             </label>
-                            <div className="col-sm-8">
+                            <div className="col-sm-9">
                               <input
                                 type="text"
                                 name="name"
+                                defaultValue={this.state.name}
                                 // placeholder="Akiles"
                                 className="form-control"
                                 onChange={this.handleChange}
@@ -118,13 +126,14 @@ class SedeFormModal extends Component {
                             </div>
                           </div>
                           <div className="mb-3 row">
-                            <label className="col-sm-4 col-form-label">
-                              Latitude
+                            <label className="col-sm-3 col-form-label">
+                              Latitud
                             </label>
-                            <div className="col-sm-8">
+                            <div className="col-sm-9">
                               <input
                                 type="text"
                                 name="latitude"
+                                defaultValue={this.state.latitude}
                                 // placeholder="Salto"
                                 className="form-control"
                                 onChange={this.handleChange}
@@ -132,13 +141,14 @@ class SedeFormModal extends Component {
                             </div>
                           </div>
                           <div className="mb-3 row">
-                            <label className="col-sm-4 col-form-label">
-                              Longitude
+                            <label className="col-sm-3 col-form-label">
+                              Longitud
                             </label>
-                            <div className="col-sm-8">
+                            <div className="col-sm-9">
                               <input
                                 type="text"
                                 name="longitude"
+                                defaultValue={this.state.longitude}
                                 // placeholder="akiles@correo.com"
                                 className="form-control"
                                 onChange={this.handleChange}
@@ -146,11 +156,42 @@ class SedeFormModal extends Component {
                             </div>
                           </div>
                           <div className="mb-3 row">
-                            <div className="col-sm-4 col-form-label">City</div>
-                            <div className="col-sm-8">
+                            <div className="col-sm-3 col-form-label">Ciudad</div>
+                            <div className="col-sm-9">
                               <input
                                 type="text"
                                 name="city"
+                                defaultValue={this.state.city}
+                                // placeholder="password"
+                                className="form-control"
+                                onChange={this.handleChange}
+                              />
+                            </div>
+                          </div>
+                          <div className="mb-3 row">
+                            <div className="col-sm-3 col-form-label">
+                              telefono
+                            </div>
+                            <div className="col-sm-9">
+                              <input
+                                type="text"
+                                name="phone"
+                                defaultValue={this.state.phone}
+                                // placeholder="password"
+                                className="form-control"
+                                onChange={this.handleChange}
+                              />
+                            </div>
+                          </div>
+                          <div className="mb-3 row">
+                            <div className="col-sm-3 col-form-label">
+                              Direccion
+                            </div>
+                            <div className="col-sm-9">
+                              <input
+                                type="text"
+                                name="address"
+                                defaultValue={this.state.address}
                                 // placeholder="password"
                                 className="form-control"
                                 onChange={this.handleChange}
@@ -167,15 +208,16 @@ class SedeFormModal extends Component {
                             className="btn btn-secondary"
                             onClick={this.toggle}
                           >
-                            cancel
+                            Cancelar
                           </button>
                         </div>
                         <div className="d-grid gap-2 col-6 mx-auto">
                           <button
                             className="btn btn-success"
-                            onClick={this.handleClick}
+                            onClick={this.enviarSede}
                           >
-                            Submit
+                            Agregar
+                            
                           </button>
                         </div>
                       </div>

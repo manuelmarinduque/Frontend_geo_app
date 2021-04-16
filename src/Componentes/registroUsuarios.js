@@ -3,6 +3,8 @@ import "../assets/Log.css";
 import jwt from "jsonwebtoken";
 import { Component } from "react";
 import { Grid, Select, MenuItem } from "@material-ui/core";
+import { Redirect } from "react-router-dom";
+
 
 class registroUsuarios extends Component {
   constructor(props) {
@@ -10,6 +12,7 @@ class registroUsuarios extends Component {
     this.state = {
       usuario: "",
       contraseña: "",
+      contraseña2:"",
       tipo: "",
       nombre: "",
       genero: "",
@@ -30,7 +33,7 @@ class registroUsuarios extends Component {
 
   componentDidMount() {
     var data1 = "";
-    fetch("", {
+    fetch("http://localhost:5500/empresa/obtener_empresas", {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -46,7 +49,7 @@ class registroUsuarios extends Component {
             return dat;
           }
         );
-        this.setState({ empresas: Object.entries(data1)[0][1] });
+        this.setState({ empresas: data.data});
       })
       .catch(console.log);
   }
@@ -56,14 +59,15 @@ class registroUsuarios extends Component {
     this.setState({ [name]: value });
   }
 
+
   handleSubmit(e) {
     var data1 = "";
     e.preventDefault();
-    fetch("http://localhost:3500/usuario/crear_usuario", {
+      
+    fetch("http://localhost:5500/usuario/crear_usuario", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer 3ywg&hsnxu43o9+iaz&sdtr",
       },
       body: JSON.stringify({
         numero_documento: this.state.usuario,
@@ -79,23 +83,16 @@ class registroUsuarios extends Component {
       .then((res) => {
         console.log(res);
       })
-      .catch((error) => console.error("Error: ", error))
-      .then((data) => {
-        data1 = jwt.verify(
-          data.token,
-          "3ywg&hsnxu43o9+iaz&sdtr",
-          function (err, dat) {
-            return dat;
-          }
-        );
-      });
+      .catch((error) => console.error("Error: ", error));
     alert("Usuario Registrado" + this.state.usuario);
-  }
+    }
+    
 
   render() {
     const {
       usuario,
       contraseña,
+      contraseña2,
       tipo,
       nombre,
       genero,
@@ -104,6 +101,8 @@ class registroUsuarios extends Component {
       telefono,
     } = this.state;
     return (
+      <div class="wrapper fadInDown">
+        
       <Grid container spacing={1} align="center">
         {/* <!-- Login Form --> */}
         <form onSubmit={this.handleSubmit}>
@@ -194,7 +193,9 @@ class registroUsuarios extends Component {
           <input type="submit" className="fadeIn tenth" value="Registrar" />
         </form>
       </Grid>
-    );
+      </div>
+    )
+    
   }
 }
 

@@ -25,7 +25,7 @@ class Login extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    fetch("http://localhost:3500/usuario/login", {
+    fetch("http://localhost:5500/usuario/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -85,7 +85,6 @@ class Login extends Component {
                 value={password}
                 onChange={this.handleChange}
               />
-
               <input type="submit" className="fadeIn fourth" value="Log In" />
             </form>
 
@@ -93,6 +92,10 @@ class Login extends Component {
             <div id="formFooter">
               <a className="underlineHover" href="#">
                 Forgot Password?
+              </a>
+              <br></br>
+              <a class="underlineHover" href="/registro">
+                  Registrarse    
               </a>
             </div>
           </div>

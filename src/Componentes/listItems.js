@@ -14,9 +14,16 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import StarBorder from "@material-ui/icons/StarBorder";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import EditIcon from "@material-ui/icons/Edit";
+import BusinessIcon from '@material-ui/icons/Business';
+import NatureIcon from '@material-ui/icons/Nature';
 import DeleteIcon from "@material-ui/icons/Delete";
+import WcIcon from '@material-ui/icons/Wc';
 import AddIcon from "@material-ui/icons/Add";
 import Link from "@material-ui/core/Link";
+import Curso from "./CursoCRUD";
+import Profesores from "./profesorCRUD";
+import SchoolIcon from '@material-ui/icons/School';
+
 
 // components
 import UserFormModal from "./UserFormModal";
@@ -37,6 +44,9 @@ export default function NestedList() {
   const classes = useStyles();
   const [open2, setOpen2] = React.useState(false);
   const [open1, setOpen1] = React.useState(false);
+  const [open3, setOpen3] = React.useState(false);
+  const [open4, setOpen4] = React.useState(false);
+  const [open5, setOpen5] = React.useState(false);
 
   const handleClick1 = () => {
     setOpen1(!open1);
@@ -44,6 +54,18 @@ export default function NestedList() {
 
   const handleClick2 = () => {
     setOpen2(!open2);
+  };
+
+  const handleClick3 = () => {
+    setOpen3(!open3);
+  };
+
+  const handleClick4 = () => {
+    setOpen4(!open4);
+  };
+
+  const handleClick5 = () => {
+    setOpen5(!open5);
   };
 
   return (
@@ -67,13 +89,13 @@ export default function NestedList() {
         <ListItemIcon>
           <PeopleIcon />
         </ListItemIcon>
-        <ListItemText primary="Usuarios" />
+        <ListItemText primary="Usuario" />
         {open1 ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open1} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           <li>
-            <Link href="/home/AgregarUsuario">
+            <Link href="">
               <ListItem button className={classes.nested}>
                 <ListItemIcon>
                   <PersonAddIcon />
@@ -87,9 +109,9 @@ export default function NestedList() {
 
       <ListItem button onClick={handleClick2}>
         <ListItemIcon>
-          <LocalGasStationIcon />
+          <SchoolIcon />
         </ListItemIcon>
-        <ListItemText primary="Estaciones" />
+        <ListItemText primary="Sedes" />
         {open2 ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open2} timeout="auto" unmountOnExit>
@@ -103,83 +125,86 @@ export default function NestedList() {
               <SedeFormModal />
             </ListItem>
           </li>
+        </List>
+      </Collapse>
+     
+      <ListItem button onClick={handleClick3}>
+        <ListItemIcon>
+          <BusinessIcon />
+        </ListItemIcon>
+        <ListItemText primary="Cursos" />
+        {open3 ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={open3} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
           <li>
-            <Link href="/home/EditarEstacion">
+              <Curso />
+          </li>
+        </List>
+      </Collapse>
+
+      <ListItem button onClick={handleClick4}>
+        <ListItemIcon>
+          <NatureIcon />
+        </ListItemIcon>
+        <ListItemText primary="Empleado" />
+        {open4 ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={open4} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+
+          <li>
+            <Profesores />
+          </li>
+
+          </List>        
+      </Collapse>
+
+          <ListItem button onClick={handleClick5}>
+        <ListItemIcon>
+          <WcIcon />
+        </ListItemIcon>
+        <ListItemText primary="Grupo" />
+        {open5 ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={open5} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <li>
+            <Link href="/home/CrearGrupo">
               <ListItem button className={classes.nested}>
                 <ListItemIcon>
-                  <EditIcon />
+                  <AddIcon />
+                </ListItemIcon>
+                <ListItemText primary="Crear" />
+              </ListItem>
+            </Link>
+          </li>
+
+          <li>
+            <Link href="/home/EditarGrupo">
+              <ListItem button className={classes.nested}>
+                <ListItemIcon>
+                  <AddIcon />
                 </ListItemIcon>
                 <ListItemText primary="Editar" />
               </ListItem>
             </Link>
           </li>
-          <li>
-            <Link href="/home/EliminarEstacion">
-              <ListItem button className={classes.nested}>
-                <ListItemIcon>
-                  <DeleteIcon />
-                </ListItemIcon>
-                <ListItemText primary="Borrar" />
-              </ListItem>
-            </Link>
-          </li>
 
           <li>
-            <Link href="/home/Sedes">
-              <ListItem button className={classes.nested}>
-                <ListItemIcon>
-                  <DashboardIcon />
-                </ListItemIcon>
-                <ListItemText primary="Sedes" />
-              </ListItem>
-            </Link>
-          </li>
-        </List>
-      </Collapse>
-
-      <ListItem button onClick={handleClick2}>
-        <ListItemIcon>
-          <LocalGasStationIcon />
-        </ListItemIcon>
-        <ListItemText primary="Cursos" />
-        {open2 ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
-      <Collapse in={open2} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <li>
-            <Link href="/home/Cusros">
+            <Link href="/home/EliminarGrupo">
               <ListItem button className={classes.nested}>
                 <ListItemIcon>
                   <AddIcon />
                 </ListItemIcon>
-                <ListItemText primary="Cursos" />
+                <ListItemText primary="Eliminar" />
               </ListItem>
             </Link>
           </li>
-        </List>
-      </Collapse>
 
-      <ListItem button onClick={handleClick2}>
-        <ListItemIcon>
-          <LocalGasStationIcon />
-        </ListItemIcon>
-        <ListItemText primary="Profesores" />
-        {open2 ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
-      <Collapse in={open2} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <li>
-            <Link href="/home/Profesore">
-              <ListItem button className={classes.nested}>
-                <ListItemIcon>
-                  <AddIcon />
-                </ListItemIcon>
-                <ListItemText primary="Profesores" />
-              </ListItem>
-            </Link>
-          </li>
-        </List>
+
+        </List>        
       </Collapse>
     </List>
-  );
+  );    
 }

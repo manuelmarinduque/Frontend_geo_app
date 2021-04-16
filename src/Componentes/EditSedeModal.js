@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Modal } from "reactstrap";
 import edit from "../assets/images/editSede.webp";
 
-class SedeFormModal extends Component {
+class EditSedeFormModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,6 +19,7 @@ class SedeFormModal extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.enviarSede = this.enviarSede.bind(this);
+    console.log(this.props.data);
   }
 
   enviarSede(e) {
@@ -209,4 +210,4 @@ class SedeFormModal extends Component {
   }
 }
 
-export default SedeFormModal;
+export default EditSedeFormModal;
