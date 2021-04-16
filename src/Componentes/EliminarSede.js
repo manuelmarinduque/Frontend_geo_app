@@ -16,9 +16,6 @@ class EliminarSede extends Component {
     };
   }
 
-  
-  
-  
   toggle = () => {
     this.setState({
       error: false,

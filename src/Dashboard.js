@@ -181,7 +181,6 @@ export default function Dashboard() {
                   <Route exact path="/home/EditarEstacion" component={EditarEstacion}/>
                   <Route exact path="/home/EliminarEstacion" component={EliminarEstacion}/>
                   <Route exact path="/home/AgregarEstacion" component={AgregarEstacion}/>
-                  <Route exact path="/home/AgregarUsuario" component={AgregarUsuario}/>
                 </Switch>
               </BrowserRouter>
 

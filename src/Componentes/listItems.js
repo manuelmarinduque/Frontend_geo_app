@@ -89,13 +89,13 @@ export default function NestedList() {
         <ListItemIcon>
           <PeopleIcon />
         </ListItemIcon>
-        <ListItemText primary="Usuarios" />
+        <ListItemText primary="Usuario" />
         {open1 ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open1} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           <li>
-            <Link href="/home/AgregarUsuario">
+            <Link href="">
               <ListItem button className={classes.nested}>
                 <ListItemIcon>
                   <PersonAddIcon />
@@ -111,7 +111,7 @@ export default function NestedList() {
         <ListItemIcon>
           <SchoolIcon />
         </ListItemIcon>
-        <ListItemText primary="Estaciones" />
+        <ListItemText primary="Sedes" />
         {open2 ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open2} timeout="auto" unmountOnExit>
