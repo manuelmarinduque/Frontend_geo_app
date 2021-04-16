@@ -1,18 +1,20 @@
 import React, { Component } from "react";
 import { Modal } from "reactstrap";
+import edit from "../assets/images/editSede.webp";
 
 // axios
 import axios from "axios";
 
-// image
-import del from "../assets/images/delete.webp";
+// components
+import TablaModalCurso from "./TablaModalCurso";
 
-class EliminarSede extends Component {
+class VerModalCurso extends Component {
   constructor(props) {
     super(props);
     this.state = {
       confirm: false,
       data: this.props.data,
+      title: this.props.title,
     };
   }
 
@@ -26,29 +28,17 @@ class EliminarSede extends Component {
 
   handleClick = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:3500/sede/eliminar_sede",
-        {
-          id_sede: this.state.data.id_sede,
-        }
-      );
-      console.log(response.data);
-    } catch (err) {
-      console.log(err.message);
-    }
+    } catch (err) {}
   };
 
   render() {
     return (
-      <div className="container" title="Delete">
-        <button
-          className="btn"
-          onClick={this.toggle}
-          style={{ borderRadius: "50%", padding: "1px" }}
-        >
-          <img src={del} alt="" height="25px" />
+      <div className="container" title="Registros">
+        <button className="btn btn-outline-dark" onClick={this.toggle}>
+          Registros
         </button>
         <Modal
+          size="lg"
           isOpen={this.state.modal}
           toggle={this.toggle}
           fullscreen="below sm"
@@ -65,31 +55,24 @@ class EliminarSede extends Component {
                       className="card-header bg-transparent"
                       style={{ textAlign: "center" }}
                     >
-                      <h4 className="text-center text-info">Eliminar Sede</h4>
+                      <h4 className="text-center text-info">
+                        {this.state.title}
+                      </h4>
                     </div>
                     <div className="card-body">
-                      <div className="container" style={{ padding: "10px" }}>
-                        <h5>
-                          ¿Desea borrar la sede {this.state.data.nombre_sede}?
-                        </h5>
-                      </div>
+                      <TablaModalCurso
+                        title="Editar Sede"
+                        data={this.state.data}
+                      />
                     </div>
                     <div className="card-footer bg-transparent">
                       <div className="row">
                         <div className="d-grid gap-2 col-6 mx-auto">
                           <button
-                            className="btn btn-secondary"
+                            className="btn btn-success block"
                             onClick={this.toggle}
                           >
-                            cancel
-                          </button>
-                        </div>
-                        <div className="d-grid gap-2 col-6 mx-auto">
-                          <button
-                            className="btn btn-danger"
-                            onClick={this.handleClick}
-                          >
-                            Eliminar
+                            Volverrr
                           </button>
                         </div>
                       </div>
@@ -112,4 +95,4 @@ class EliminarSede extends Component {
   }
 }
 
-export default EliminarSede;
+export default VerModalCurso;

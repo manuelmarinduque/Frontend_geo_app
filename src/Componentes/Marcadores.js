@@ -1,16 +1,12 @@
-import axios from "axios";
 import React from "react";
 
 import { Marker, Popup } from "react-leaflet";
 import EditSedeModal from "./EditSedeModal";
 import EliminarSede from "./EliminarSede";
+import VerModalCurso from "./VerModalCurso";
+import VerModalProfesor from "./VerModalProfesor";
 
 const Marcadores = ({ marcadores }) => {
-  const popupContent = {
-    textAlign: "center",
-    height: "350px",
-    marginTop: "30px",
-  };
   const popupHead = {
     fontWeight: "bold",
     fontSize: "22px",
@@ -21,13 +17,9 @@ const Marcadores = ({ marcadores }) => {
     marginBottom: "20px",
   };
 
-  const okText = {
-    fontSize: "15px",
-  };
   return marcadores.map((marcador, i) => (
     <Marker key={i} position={[marcador.latitud, marcador.longitud]}>
       <Popup style={{ minWidth: "100px" }}>
-        {console.log(marcador)}
         <b style={popupHead}>Nombre:</b>{" "}
         <span style={popupText}>{marcador.nombre_sede}.</span> <br />
         <b style={popupHead}>Direccion:</b>{" "}
@@ -38,7 +30,7 @@ const Marcadores = ({ marcadores }) => {
         <span style={popupText}>{marcador.ciudad}. </span>
         <br />
         <br />
-        <table class="table table-hover">
+        <table className="table table-hover">
           <thead className="table-dark">
             <tr>
               <th scope="col">RECURSO</th>
@@ -52,18 +44,21 @@ const Marcadores = ({ marcadores }) => {
               <td>
                 <EditSedeModal data={marcador} />
               </td>
-              <td><EliminarSede data ={marcador} />
+              <td>
+                <EliminarSede data={marcador} />
               </td>
             </tr>
             <tr>
               <td>Curso</td>
-              <td>boton</td>
-              <td>boton</td>
+              <td colSpan="2">
+                <VerModalCurso title="Cursos" data={marcador} />
+              </td>
             </tr>
             <tr>
               <td>Profesor</td>
-              <td>boton</td>
-              <td>boton</td>
+              <td colSpan="2">
+                <VerModalProfesor title="Profesores" data={marcador} />
+              </td>
             </tr>
           </tbody>
         </table>

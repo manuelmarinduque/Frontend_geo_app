@@ -56,12 +56,12 @@ class Login extends Component {
     if (!this.state.acces) {
       const { numero_documento, password } = this.state;
       return (
-        <div class="wrapper fadeInDown">
+        <div className="wrapper fadeInDown">
           <div id="formContent">
             {/* <!-- Tabs Titles --> */}
 
             {/* <!-- Icon --> */}
-            <div class="fadeIn first">
+            <div className="fadeIn first">
               <img src={image} id="icon" alt="User Icon" />
             </div>
 
@@ -70,7 +70,7 @@ class Login extends Component {
               <input
                 type="text"
                 id="login"
-                class="fadeIn second"
+                className="fadeIn second"
                 name="numero_documento"
                 placeholder="documento"
                 value={numero_documento}
@@ -79,19 +79,18 @@ class Login extends Component {
               <input
                 type="password"
                 id="password"
-                class="fadeIn third"
+                className="fadeIn third"
                 name="password"
                 placeholder="password"
                 value={password}
                 onChange={this.handleChange}
               />
-
-              <input type="submit" class="fadeIn fourth" value="Log In"/>
+              <input type="submit" className="fadeIn fourth" value="Log In" />
             </form>
 
             {/* <!-- Remind Passowrd --> */}
             <div id="formFooter">
-              <a class="underlineHover" href="#">
+              <a className="underlineHover" href="#">
                 Forgot Password?
               </a>
               <br></br>
