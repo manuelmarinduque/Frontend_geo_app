@@ -111,7 +111,7 @@ class registroUsuarios extends Component {
             <input
               type="text"
               id="usuario"
-              class="fadeIn second"
+              className="fadeIn second"
               name="usuario"
               placeholder="identificacion"
               value={usuario}
@@ -122,7 +122,7 @@ class registroUsuarios extends Component {
             <input
               type="password"
               id="password"
-              class="fadeIn third"
+              className="fadeIn third"
               name="contraseña"
               placeholder="contraseña"
               value={contraseña}
@@ -132,7 +132,7 @@ class registroUsuarios extends Component {
           <input
             type="text"
             id="tipo"
-            class="fadeIn fourth"
+            className="fadeIn fourth"
             name="tipo"
             placeholder="tipo de documento"
             value={tipo}
@@ -141,7 +141,7 @@ class registroUsuarios extends Component {
           <input
             type="text"
             id="nombre"
-            class="fadeIn fifth"
+            className="fadeIn fifth"
             name="nombre"
             placeholder="Nombre Completo"
             value={nombre}
@@ -150,7 +150,7 @@ class registroUsuarios extends Component {
           <input
             type="text"
             id="genero"
-            class="fadeIn sixth"
+            className="fadeIn sixth"
             name="genero"
             placeholder="genero"
             value={genero}
@@ -159,7 +159,7 @@ class registroUsuarios extends Component {
           <input
             type="text"
             id="nacionalidad"
-            class="fadeIn seventh"
+            className="fadeIn seventh"
             name="nacionalidad"
             placeholder="nacionalidad"
             value={nacionalidad}
@@ -168,7 +168,7 @@ class registroUsuarios extends Component {
           <input
             type="text"
             id="direccion"
-            class="fadeIn eighth"
+            className="fadeIn eighth"
             name="direccion"
             placeholder="direccion"
             value={direccion}
@@ -177,7 +177,7 @@ class registroUsuarios extends Component {
           <input
             type="text"
             id="telefono"
-            class="fadeIn ninth"
+            className="fadeIn ninth"
             name="telefono"
             placeholder="telefono"
             value={telefono}
@@ -191,7 +191,7 @@ class registroUsuarios extends Component {
           >
             <selectEmpresa empresas={this.state.empresas} />
           </Select>
-          <input type="submit" class="fadeIn tenth" value="Registrar" />
+          <input type="submit" className="fadeIn tenth" value="Registrar" />
         </form>
       </Grid>
     );

@@ -1,15 +1,11 @@
-import axios from "axios";
 import React from "react";
 
 import { Marker, Popup } from "react-leaflet";
 import EditSedeModal from "./EditSedeModal";
+import EliminarSede from "./EliminarSede";
+import VerModal from "./VerModal";
 
 const Marcadores = ({ marcadores }) => {
-  const popupContent = {
-    textAlign: "center",
-    height: "350px",
-    marginTop: "30px",
-  };
   const popupHead = {
     fontWeight: "bold",
     fontSize: "22px",
@@ -20,9 +16,6 @@ const Marcadores = ({ marcadores }) => {
     marginBottom: "20px",
   };
 
-  const okText = {
-    fontSize: "15px",
-  };
   return marcadores.map((marcador, i) => (
     <Marker key={i} position={[marcador.latitud, marcador.longitud]}>
       <Popup style={{ minWidth: "100px" }}>
@@ -37,7 +30,7 @@ const Marcadores = ({ marcadores }) => {
         <span style={popupText}>{marcador.ciudad}. </span>
         <br />
         <br />
-        <table class="table table-hover">
+        <table className="table table-hover">
           <thead className="table-dark">
             <tr>
               <th scope="col">RECURSO</th>
@@ -49,19 +42,21 @@ const Marcadores = ({ marcadores }) => {
             <tr>
               <td>Sede</td>
               <td>
-                <EditSedeModal data={marcadores} />
+                <EditSedeModal data={marcador} />
               </td>
-              <td>boton</td>
+              <td>
+                <EliminarSede data={marcador} />
+              </td>
             </tr>
             <tr>
               <td>Curso</td>
-              <td>boton</td>
-              <td>boton</td>
+              <td colSpan="2">
+                <VerModal title="Cursos" data={marcador} />
+              </td>
             </tr>
             <tr>
               <td>Profesor</td>
-              <td>boton</td>
-              <td>boton</td>
+              <td colSpan="2">boton</td>
             </tr>
           </tbody>
         </table>

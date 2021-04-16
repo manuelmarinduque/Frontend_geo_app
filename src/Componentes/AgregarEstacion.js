@@ -60,7 +60,7 @@ class AgregarEstacion extends Component {
 
   render() {
     return (
-      <div class="wrapper fadeInDown" width="">
+      <div className="wrapper fadeInDown" width="">
         <div id="formContent">
           <h2>Registro de Estaciones</h2>
 
@@ -71,7 +71,7 @@ class AgregarEstacion extends Component {
             <input
               type="text"
               id="name"
-              class="fadeIn second"
+              className="fadeIn second"
               name="name"
               placeholder="Nombre de la estacion de gasolina"
               value={this.state.nombre}
@@ -83,7 +83,7 @@ class AgregarEstacion extends Component {
             <input
               type="text"
               id="address"
-              class="fadeIn third"
+              className="fadeIn third"
               name="address"
               placeholder="Direccion de la estacion de gasolina "
               value={this.state.direccion}
@@ -95,7 +95,7 @@ class AgregarEstacion extends Component {
             <input
               type="text"
               id="phone"
-              class="fadeIn third"
+              className="fadeIn third"
               name="phone"
               placeholder="Telefono de la estacion de gasolina"
               value={this.state.telefono}
@@ -107,7 +107,7 @@ class AgregarEstacion extends Component {
             <input
               type="text"
               id="latitude"
-              class="fadeIn third"
+              className="fadeIn third"
               name="latitude"
               placeholder="Latitud de la estacion"
               value={this.state.latitud}
@@ -119,13 +119,13 @@ class AgregarEstacion extends Component {
             <input
               type="text"
               id="longitude"
-              class="fadeIn third"
+              className="fadeIn third"
               name="longitude"
               placeholder="Longitud de la estacion"
               value={this.state.longitud}
               onChange={this.onChange}
             />
-            <input type="submit" class="fadeIn fourth" value="Registrar" />
+            <input type="submit" className="fadeIn fourth" value="Registrar" />
           </form>
         </div>
       </div>
